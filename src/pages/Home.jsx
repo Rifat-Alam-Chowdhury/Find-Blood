@@ -2,12 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import bgimg from "././../Assets/Ellipse8.png";
 import { motion } from "framer-motion";
+import Searchdonner from "../components/Searchdonner";
+import WeareNowAt from "../components/WeareNowAt";
+import AboutUs from "../components/AboutUs";
 
 function Home() {
-  const textVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  };
   return (
     <>
       <motion.div
@@ -78,6 +77,9 @@ function Home() {
           Learn More
         </button>
       </div>
+      <Searchdonner />
+      <WeareNowAt />
+      <AboutUs />
     </>
   );
 }
