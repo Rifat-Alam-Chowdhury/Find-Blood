@@ -24,7 +24,8 @@ vite.config.js
 
 # Lock file (Optional, include or ignore depending on your team needs)
 package-lock.json
-
+.gitignore
+eslint.config.js
 # Package file (Usually tracked; exclude only if necessary)
 package.json
 
