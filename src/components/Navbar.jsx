@@ -17,45 +17,43 @@ function Navbar() {
     <>
       <li>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? "text-red-700" : "text-transparent"
-          }
+          to="/"
+          className={({ isActive }) => (isActive ? "text-red-700" : "")}
         >
-          <Link to={"/"}>Home</Link>
+          Home
         </NavLink>
       </li>
 
       <li>
         <NavLink
-          className={(isActive) => {
-            isActive ? "text-red-700" : "text-transparent";
-          }}
+          to="/donner"
+          className={({ isActive }) => (isActive ? "text-red-700" : "")}
         >
-          <Link to={"/Donation"}>Donation</Link>
+          Donner
         </NavLink>
       </li>
+
       <li>
         <NavLink
-          className={(isActive) => {
-            isActive ? "text-red-700" : "text-transparent";
-          }}
+          to="/blog"
+          className={({ isActive }) => (isActive ? "text-red-700" : "")}
         >
-          <Link to={"/blog"}>Blog</Link>
+          Blog
         </NavLink>
       </li>
+
       <li>
         <NavLink
-          className={(isActive) => {
-            isActive ? "text-red-700" : "text-transparent";
-          }}
+          to="/login"
+          className={({ isActive }) => (isActive ? "text-red-700" : "")}
         >
-          <Link to={"/login"}>log In</Link>
+          Log In
         </NavLink>
       </li>
     </>
   );
   return (
-    <div className="navbar justify-between">
+    <div className="navbar justify-between ">
       {/* todo:mobile */}
       <div className="drawer lg:hidden w-7 z-10">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -98,7 +96,7 @@ function Navbar() {
       </div>
 
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{NavOptions}</ul>
+        <ul className="flex justify-between gap-5 px-1">{NavOptions}</ul>
       </div>
 
       {/* //search */}

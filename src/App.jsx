@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+// import bgimg from "./Assets/Ellipse8.png";
 
 function App() {
   return (
