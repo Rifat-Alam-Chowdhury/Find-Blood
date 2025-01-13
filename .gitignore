@@ -1,0 +1,40 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+# Node.js dependencies
+node_modules/
+
+# Build directories
+dist/
+dist-ssr/
+
+# Environment files
+*.local
+.env.local
+
+# Config files (Optional)
+postcss.config.js
+tailwind.config.js
+vite.config.js
+
+# Lock file (Optional, include or ignore depending on your team needs)
+package-lock.json
+
+# Package file (Usually tracked; exclude only if necessary)
+package.json
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
