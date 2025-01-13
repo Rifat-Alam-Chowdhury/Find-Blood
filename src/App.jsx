@@ -1,7 +1,18 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <>
-      <div className="text-2xl text-green-500 border-2">text</div>
+      {/* nav */}
+
+      <Navbar />
+      <div className="min-h-[calc(100vh-288px)]">
+        <Outlet />
+      </div>
+      {/* footer */}
+      <Footer />
     </>
   );
 }
