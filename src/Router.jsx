@@ -6,6 +6,7 @@ import Donner from "./pages/Donner";
 import SearchDonnerPage from "./pages/SearchDonnerPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import DashBoard from "./pages/DashBoard";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/Search-donner",
         element: <SearchDonnerPage />,
+      },
+      {
+        path: "//DashBoard",
+        element: <DashBoard />,
       },
     ],
   },

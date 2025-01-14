@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import bgimg from "././../Assets/Ellipse8.png";
 import { motion } from "framer-motion";
@@ -6,7 +6,11 @@ import Searchdonner from "../components/Searchdonner";
 import WeareNowAt from "../components/WeareNowAt";
 import AboutUs from "../components/AboutUs";
 
+import { AUthfirebase } from "../Auth/AuthApi";
+
 function Home() {
+  const { user } = useContext(AUthfirebase);
+
   return (
     <>
       <motion.div
@@ -44,18 +48,22 @@ function Home() {
           </div>
 
           <div className=" ml-7 ">
-            <Link
-              to={"/login"}
-              className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
-            >
-              Join as a Donner
-            </Link>
-            <Link
-              to={"/registration"}
-              className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
-            >
-              Join as a Donner
-            </Link>
+            {user ? (
+              <Link
+                to={"/DashBoard"}
+                className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
+              >
+                Go To DashBoard
+              </Link>
+            ) : (
+              <Link
+                to={"/registration"}
+                className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
+              >
+                Join as a Donner
+              </Link>
+            )}
+
             <Link
               to={"Search-donner"}
               className=" py-2 rounded-r-xl  px-6 bg-red-950 text-white border-none "
