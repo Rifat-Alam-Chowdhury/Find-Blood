@@ -44,10 +44,22 @@ function Home() {
           </div>
 
           <div className=" ml-7 ">
-            <Link className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none ">
+            <Link
+              to={"/login"}
+              className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
+            >
               Join as a Donner
             </Link>
-            <Link className=" py-2 rounded-r-xl  px-6 bg-red-950 text-white border-none ">
+            <Link
+              to={"/registration"}
+              className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
+            >
+              Join as a Donner
+            </Link>
+            <Link
+              to={"Search-donner"}
+              className=" py-2 rounded-r-xl  px-6 bg-red-950 text-white border-none "
+            >
               Search Donner
             </Link>
           </div>
@@ -73,7 +85,7 @@ function Home() {
         </div>
       </div>
       <div className="w-4/12 lg:w-2/12  mx-auto mb-6">
-        <button className="flex mx-auto  bg-red-900 lg:px-6 py-1 px-2 rounded-md ">
+        <button className="flex mx-auto  bg-red-900 lg:px-6 py-1 px-2 rounded-md text-white ">
           Learn More
         </button>
       </div>

@@ -3,6 +3,10 @@ import App from "./App";
 import Home from "./pages/home";
 import Donner from "./pages/Donner";
 
+import SearchDonnerPage from "./pages/SearchDonnerPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +19,18 @@ const router = createBrowserRouter([
       {
         path: "/donner",
         element: <Donner />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/registration",
+        element: <Register />,
+      },
+      {
+        path: "/Search-donner",
+        element: <SearchDonnerPage />,
       },
     ],
   },

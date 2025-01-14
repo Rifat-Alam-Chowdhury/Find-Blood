@@ -53,7 +53,7 @@ function Navbar() {
     </>
   );
   return (
-    <div className="navbar justify-between ">
+    <div className="navbar justify-between bg-[#6a0b37] text-white">
       {/* todo:mobile */}
       <div className="drawer lg:hidden w-7 z-10">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
