@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import AuthApi, { AUthfirebase } from "../Auth/AuthApi";
 
 /**
  * will have a logo,
@@ -13,6 +14,7 @@ import { Link, NavLink } from "react-router-dom";
  */
 
 function Navbar() {
+  const { user, SignOutUser } = useContext(AUthfirebase);
   const NavOptions = (
     <>
       <li>
@@ -42,14 +44,25 @@ function Navbar() {
         </NavLink>
       </li>
 
-      <li>
-        <NavLink
-          to="/login"
-          className={({ isActive }) => (isActive ? "text-red-700" : "")}
-        >
-          Log In
-        </NavLink>
-      </li>
+      {user ? (
+        <li>
+          <NavLink
+            onClick={SignOutUser}
+            className={({ isActive }) => (isActive ? "text-red-700" : "")}
+          >
+            Log Out
+          </NavLink>
+        </li>
+      ) : (
+        <li>
+          <NavLink
+            to="/login"
+            className={({ isActive }) => (isActive ? "text-red-700" : "")}
+          >
+            Log In
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
