@@ -14,6 +14,9 @@ function AuthApi({ children }) {
   const CreateUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const LogIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
   const SignOutUser = () => {
     return signOut(auth);
   };
@@ -29,6 +32,7 @@ function AuthApi({ children }) {
     CreateUser,
     SignOutUser,
     user,
+    LogIn,
   };
 
   return (

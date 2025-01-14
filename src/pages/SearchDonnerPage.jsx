@@ -4,9 +4,9 @@ import uselocationapi from "../Hooks/uselocationapi";
 
 function SearchDonnerPage() {
   const location = useLocation();
-  const [group, distric] = uselocationapi([]);
-  const { name, district, date } = location.state || [];
-  console.log(name, district, date);
+  const [group, distric, Division] = uselocationapi([]);
+  const { name, district, date, division } = location.state || [];
+  console.log(name, district, date, division);
 
   return (
     <>
@@ -22,6 +22,17 @@ function SearchDonnerPage() {
             {group?.map((group, index) => (
               <option key={index} value={group.group}>
                 {group.group}
+              </option>
+            ))}
+          </select>
+
+          <select className="select w-full max-w-xs" name="Divisions">
+            <option disabled selected>
+              {division ? division : "Divisions"}
+            </option>
+            {Division?.map((division, index) => (
+              <option key={index} value={division.division}>
+                {division.division}
               </option>
             ))}
           </select>

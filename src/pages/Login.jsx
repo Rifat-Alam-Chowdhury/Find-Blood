@@ -1,13 +1,29 @@
 import { Input, Typography, Button } from "@material-tailwind/react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AUthfirebase } from "../Auth/AuthApi";
 
 function Login() {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
+  const { LogIn } = useContext(AUthfirebase);
+  const Navigate = useNavigate();
+
+  const HandleLogin = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const Password = e.target.Password.value;
+    await LogIn(email, Password)
+      .then(() => {
+        Navigate("/");
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  };
   return (
     <>
       <section className="grid text-center h-screen items-center p-8 border-2">
@@ -18,7 +34,10 @@ function Login() {
           <Typography className="mb-16 text-gray-600 font-normal text-[18px]">
             Enter your email and password to sign in
           </Typography>
-          <form action="#" className="mx-auto max-w-[24rem] text-left">
+          <form
+            onSubmit={HandleLogin}
+            className="mx-auto max-w-[24rem] text-left"
+          >
             <div className="mb-6">
               <label htmlFor="email">
                 <Typography
@@ -52,6 +71,7 @@ function Login() {
               </label>
               <Input
                 size="lg"
+                name="Password"
                 placeholder="********"
                 labelProps={{
                   className: "hidden",
@@ -72,6 +92,7 @@ function Login() {
             <Button
               color="gray"
               size="lg"
+              type="submit"
               className="mt-6 bg-[#6a0b37]"
               fullWidth
             >

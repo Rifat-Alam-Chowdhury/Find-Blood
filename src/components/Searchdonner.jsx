@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import uselocationapi from "../Hooks/uselocationapi";
 
 function Searchdonner() {
-  const [group, distric] = uselocationapi();
+  const [group, distric, Division] = uselocationapi();
 
   const navigate = useNavigate();
 
@@ -10,10 +10,12 @@ function Searchdonner() {
     e.preventDefault();
     const name = e.target.group.value;
     const district = e.target.district.value;
+    const division = e.target.division.value;
     const date = e.target.date.value;
+    console.log(name, district, division, date);
 
     navigate("Search-donner", {
-      state: { name, district, date },
+      state: { name, district, date, division },
     });
   };
 
@@ -31,6 +33,17 @@ function Searchdonner() {
             {group?.map((group, index) => (
               <option key={index} value={group.group}>
                 {group.group}
+              </option>
+            ))}
+          </select>
+
+          <select className="select w-full max-w-xs" name="division">
+            <option disabled selected>
+              Select Division
+            </option>
+            {Division?.map((division, index) => (
+              <option key={index} value={division.division}>
+                {division.division}
               </option>
             ))}
           </select>
