@@ -4,7 +4,7 @@ import { MdBloodtype } from "react-icons/md";
 function LoaderSpinner() {
   return (
     <>
-      <div className="flex items-center justify-center h-96">
+      <div className="">
         <MdBloodtype size={100} className="text-red-300 animate-ping" />
       </div>
     </>

@@ -7,7 +7,8 @@ import { AUthfirebase } from "../Auth/AuthApi";
 import { MdBloodtype } from "react-icons/md";
 
 function Register() {
-  const [group, districtList] = uselocationapi();
+  const [group, districtList, Division] = uselocationapi();
+
   const { CreateUser } = useContext(AUthfirebase);
   const navigate = useNavigate();
   const [Loading, setLoading] = useState(false);
@@ -15,6 +16,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [district, setDistrict] = useState("");
+  const [division, setdivision] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -44,11 +46,13 @@ function Register() {
         name,
         email,
         district,
+        division,
         bloodGroup,
         image: imgUrl,
         status,
         role,
       };
+
       const res = await axios.post(
         `http://localhost:3000/userRegistration`,
         userData
@@ -154,6 +158,34 @@ function Register() {
               {districtList?.map((d, index) => (
                 <option key={index} value={d.name}>
                   {d.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* division */}
+          <div className="mb-6">
+            <label htmlFor="division">
+              <Typography
+                variant="small"
+                className="mb-2 block font-medium text-[#6a0b37]"
+              >
+                Division
+              </Typography>
+            </label>
+            <select
+              id="division"
+              value={division}
+              onChange={(e) => setdivision(e.target.value)}
+              required
+              className="select select-error w-full max-w-xs"
+            >
+              <option value="" disabled selected>
+                Division
+              </option>
+              {Division?.map((d, index) => (
+                <option key={index} value={d.name}>
+                  {d.division}
                 </option>
               ))}
             </select>

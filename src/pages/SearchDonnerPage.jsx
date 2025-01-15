@@ -93,7 +93,9 @@ function SearchDonnerPage() {
 
         <div>
           {isLoading ? (
-            <LoaderSpinner />
+            <div className="flex items-center border-2 justify-center h-96">
+              <LoaderSpinner />
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="table">

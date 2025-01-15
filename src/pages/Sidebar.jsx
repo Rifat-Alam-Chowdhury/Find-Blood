@@ -26,9 +26,8 @@ function Sidebar({ data }) {
     <div className="border-2 border-red-700 h-screen w-20 lg:w-80">
       {/* controls */}
       <div className="flex flex-col">
+        <Link to={"/DashBoard/profile"}>Profile</Link>
         <Link to={`donation/${user?.email}`}>Donation</Link>
-        <Link>Profile</Link>
-
         {role === "admin" && AdminView}
       </div>
     </div>
