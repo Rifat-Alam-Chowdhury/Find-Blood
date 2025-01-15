@@ -40,8 +40,8 @@ function DashBoard() {
       </div>
       {/* //Dashboard Navbar */}
 
-      <div className="">
-        <Sidebar />
+      <div className="flex">
+        <Sidebar data={data?.data || {}} />
 
         <Outlet />
       </div>
