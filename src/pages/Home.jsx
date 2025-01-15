@@ -51,14 +51,14 @@ function Home() {
             {user ? (
               <Link
                 to={"/DashBoard"}
-                className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
+                className=" py-2 rounded-l-xl bg-[#6a0b37] mr-[2px] px-6 bg-red-950 text-white border-none "
               >
                 Go To DashBoard
               </Link>
             ) : (
               <Link
                 to={"/registration"}
-                className=" py-2 rounded-l-xl  mr-[2px] px-6 bg-red-950 text-white border-none "
+                className=" py-2 rounded-l-xl bg-[#6a0b37] mr-[2px] px-6 bg-red-950 text-white border-none "
               >
                 Join as a Donner
               </Link>
@@ -66,7 +66,7 @@ function Home() {
 
             <Link
               to={"Search-donner"}
-              className=" py-2 rounded-r-xl  px-6 bg-red-950 text-white border-none "
+              className=" py-2 rounded-r-xl bg-[#6a0b37] px-6 bg-red-950 text-white border-none "
             >
               Search Donner
             </Link>

@@ -56,7 +56,7 @@ function Register() {
       console.log(res.data);
       setLoading(false);
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
       setLoading(false);
       alert("An error occurred during registration.");
     }

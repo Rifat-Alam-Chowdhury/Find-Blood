@@ -13,14 +13,14 @@ function useAxios() {
   axiosInterface.interceptors.response.use(
     (response) => {
       return response;
-    }
-    // (err) => {
-    //   if (err.response?.status === 401 || err.response?.status === 403) {
-    //     SignOutUser();
-    //   }
+    },
+    (err) => {
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        SignOutUser();
+      }
 
-    //   return Promise.reject(err);
-    // }
+      return Promise.reject(err);
+    }
   );
 
   return axiosInterface;
