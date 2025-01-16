@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     element: <DashBoard />,
     children: [
       {
-        path: "DashBoard",
+        path: "/DashBoard/:email",
         element: <DashBoardPage></DashBoardPage>,
       },
       {

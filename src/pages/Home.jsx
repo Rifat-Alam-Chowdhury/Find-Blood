@@ -50,7 +50,7 @@ function Home() {
           <div className=" ml-7 ">
             {user ? (
               <Link
-                to={"/DashBoard"}
+                to={`/DashBoard/${user?.email}`}
                 className=" py-2 rounded-l-xl bg-[#6a0b37] mr-[2px] px-6 bg-red-950 text-white border-none "
               >
                 Go To DashBoard
