@@ -27,8 +27,8 @@ function Sidebar({ data }) {
       {/* controls */}
       <div className="flex flex-col p-0 lg:p-4 ">
         <Link to={"/DashBoard/profile"}>Profile</Link>
-        <Link to={`donation/${user?.email}`}>Donation</Link>
-        {role === "admin" && AdminView}
+        <Link to={"DashBoard"}>Dashboard</Link>
+        <Link to={"/DashBoard/create-donation-request"}>Request Donation </Link>
       </div>
     </div>
   );

@@ -11,6 +11,8 @@ import DashBoard from "./pages/DashBoard";
 import axios from "axios";
 import UserDonation from "./pages/UserDonation";
 import Profile from "./pages/Profile";
+import DashBoardPage from "./pages/DashBoardPage";
+import DonationCreate from "./pages/DonationCreate";
 
 const router = createBrowserRouter([
   {
@@ -44,13 +46,17 @@ const router = createBrowserRouter([
     element: <DashBoard />,
     children: [
       {
+        path: "DashBoard",
+        element: <DashBoardPage></DashBoardPage>,
+      },
+      {
         path: "profile",
         element: <Profile />,
       },
-      // {
-      //   path: "donation/:user",
-      //   element: <UserDonation></UserDonation>,
-      // },
+      {
+        path: "create-donation-request",
+        element: <DonationCreate />,
+      },
     ],
   },
 ]);
