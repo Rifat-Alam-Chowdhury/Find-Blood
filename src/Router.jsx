@@ -13,6 +13,7 @@ import UserDonation from "./pages/UserDonation";
 import Profile from "./pages/Profile";
 import DashBoardPage from "./pages/DashBoardPage";
 import DonationCreate from "./pages/DonationCreate";
+import MyDonations from "./pages/MyDonations";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "create-donation-request",
         element: <DonationCreate />,
+      },
+      {
+        path: "my-donation-requests",
+        element: <MyDonations />,
       },
     ],
   },
