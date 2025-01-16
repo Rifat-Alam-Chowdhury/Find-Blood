@@ -7,13 +7,13 @@ import Sidebar from "./Sidebar";
 
 function DashBoard() {
   const { user } = useContext(AUthfirebase);
-  const { data, isLoading } = useQuery({
+  const { data = [], isLoading } = useQuery({
     queryKey: ["alldata", user?.email], // Include email in the queryKey
     queryFn: async () => {
-      const res = await axios.post(
-        `${import.meta.env.VITE_URL}Dashboard`,
-        { email: user?.email } // Pass email as an object
-      );
+      // const res = await axios.post(
+      //   `${import.meta.env.VITE_URL}Dashboard`,
+      //   { email: user?.email } // Pass email as an object
+      // );
       return res.data;
     },
     enabled: !!user?.email, // Only run query when email is defined

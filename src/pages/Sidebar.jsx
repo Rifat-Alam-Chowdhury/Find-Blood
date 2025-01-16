@@ -5,7 +5,7 @@ import { AUthfirebase } from "../Auth/AuthApi";
 function Sidebar({ data }) {
   const { role } = data || {};
   const { user } = useContext(AUthfirebase);
-  console.log(data.role);
+  // console.log(data.role);
 
   const AdminView = (
     <>
@@ -23,9 +23,9 @@ function Sidebar({ data }) {
   );
 
   return (
-    <div className="border-2 border-red-700 h-screen w-20 lg:w-80">
+    <div className=" h-screen w-20 lg:w-80">
       {/* controls */}
-      <div className="flex flex-col">
+      <div className="flex flex-col p-0 lg:p-4 ">
         <Link to={"/DashBoard/profile"}>Profile</Link>
         <Link to={`donation/${user?.email}`}>Donation</Link>
         {role === "admin" && AdminView}
