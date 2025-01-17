@@ -4,46 +4,34 @@ import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AUthfirebase } from "../Auth/AuthApi";
 import Sidebar from "./Sidebar";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 function DashBoard() {
+  const axiosPublic = useAxiosPublic();
   const { user } = useContext(AUthfirebase);
-  const { data = [], isLoading } = useQuery({
-    queryKey: ["alldata", user?.email],
-    queryFn: async () => {
-      // const res = await axios.post(
-      //   `${import.meta.env.VITE_URL}Dashboard`,
-      //   { email: user?.email } // Pass email as an object
-      // );
-      return res.data;
-    },
-    enabled: !!user?.email,
-  });
+  // const { data = [], isLoading } = useQuery({
+  //   queryKey: ["alldata", user?.email],
+  //   queryFn: async () => {
+  //     const res = await axiosPublic.post(`Dashboard`, { email: user?.email });
+  //     return res.data;
+  //   },
+  //   enabled: !!user?.email,
+  // });
 
-  const {
-    status = "",
-    role = "",
-    name = "",
-    image = "",
-    email = "",
-    district = "",
-    bloodGroup = "",
-  } = data?.data || {};
+  // const {
+  //   status = "",
+  //   role = "",
+  //   name = "",
+  //   image = "",
+  //   email = "",
+  //   district = "",
+  //   bloodGroup = "",
+  // } = data?.data || {};
 
   return (
     <div>
-      {/* //Dashboard Navbar */}
-      <div className="navbar bg-red-500 text-black flex justify-around">
-        <Link to={"/"} className="btn btn-ghost text-xl">
-          DashBoard
-        </Link>
-        <h1>
-          Welcome {role} {name}
-        </h1>
-      </div>
-      {/* //Dashboard Navbar */}
-
       <div className="flex">
-        <Sidebar data={data?.data || {}} />
+        <Sidebar />
 
         <Outlet />
       </div>

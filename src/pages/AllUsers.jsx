@@ -32,8 +32,6 @@ function AllUsers() {
     }
   };
   const HandleChangeRole = async (e, _id) => {
-    console.log(e, _id);
-
     const ChangeRole = await AxiosPublic.post(`Changerole`, {
       id: _id,
       role: e,

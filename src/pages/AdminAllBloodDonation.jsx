@@ -1,24 +1,23 @@
-import React, { useContext } from "react";
-import { AUthfirebase } from "../Auth/AuthApi";
-import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
-function MyDonations() {
-  const { user } = useContext(AUthfirebase);
-  const Axiospublic = useAxiosPublic();
+function AdminAllBloodDonation() {
+  const axiospublic = useAxiosPublic();
+
   const {
-    data: MydonaitonData = [],
+    data = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: "donation requests",
+    queryKey: "all blood",
     queryFn: async () => {
-      const res = await Axiospublic.post(`mydonation/${user?.email}`);
+      const res = await axiospublic.post(`All-BloodReq`);
       return res.data;
     },
-    enabled: !!user?.email,
   });
-  console.log(MydonaitonData);
+
+  console.log(data);
 
   return (
     <>
@@ -34,15 +33,16 @@ function MyDonations() {
               <th>donation date</th>
               <th>donation time</th>
               <th>blood group</th>
+              <th>requestedperson</th>
               <th>donation status</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
 
-            {MydonaitonData.length === 0
+            {data.length === 0
               ? "You have not made any requests"
-              : MydonaitonData?.map((data, index) => {
+              : data?.map((data, index) => {
                   return (
                     <tr className="bg-base-200" key={index}>
                       <th>{index + 1}</th>
@@ -52,6 +52,16 @@ function MyDonations() {
                       <td>{data.donationDate}</td>
                       <td>{data.donationTime}</td>
                       <td>{data.bloodGroup}</td>
+                      <td>
+                        <select name="" id="">
+                          {data.requestedperson?.map((person, index) => (
+                            <option key={index} value={person}>
+                              {person}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+
                       <td>{data.donationStatus}</td>
                     </tr>
                   );
@@ -63,4 +73,4 @@ function MyDonations() {
   );
 }
 
-export default MyDonations;
+export default AdminAllBloodDonation;
