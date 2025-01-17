@@ -29,6 +29,7 @@ function Sidebar({ data }) {
         <Link to={"/DashBoard/profile"}>Profile</Link>
         <Link to={"DashBoard"}>Dashboard</Link>
         <Link to={"my-donation-requests"}>My DOnation Request</Link>
+        <Link to={"/DashBoard/AllUsers"}>All Users</Link>
         <Link to={"/DashBoard/create-donation-request"}>Request Donation </Link>
       </div>
     </div>

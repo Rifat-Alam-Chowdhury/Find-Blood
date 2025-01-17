@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Dashboardcard() {
   const { data } = useQuery({
@@ -23,6 +24,7 @@ function Dashboardcard() {
             <h2 className="card-title">Total User</h2>
             <p>{data?.totoalUser}</p>
           </div>
+          <Link to={"/DashBoard/AllUsers"}>All User</Link>
         </div>
         {/* card2 */}
         <div className="card card-compact bg-base-100 w-96 shadow-xl">
