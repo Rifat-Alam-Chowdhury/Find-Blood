@@ -5,6 +5,7 @@ import axios from "axios";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { AUthfirebase } from "../Auth/AuthApi";
 import { useQuery } from "@tanstack/react-query";
+import Blogcard from "../components/Blogcard";
 
 function ContentManagement() {
   const editor = useRef(null);
@@ -41,6 +42,20 @@ function ContentManagement() {
     enabled: !!user?.email,
   });
   console.log(data);
+
+  //all blogs
+  const {
+    data: AllBlogs = [],
+    isLoading: AllBlogLoading,
+    refetch: Allblogrefetch,
+  } = useQuery({
+    queryKey: "all blogs",
+    queryFn: async () => {
+      const allblogs = await axiosapi.post("allblog");
+      return allblogs.data;
+    },
+  });
+  console.log(AllBlogs);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -80,6 +95,7 @@ function ContentManagement() {
       const upload = await axiosapi.post("createblog", info);
       console.log(upload.data);
       setLoading(false);
+      Allblogrefetch();
       setTitle("");
       setContent("");
       setImage(null);
@@ -92,19 +108,6 @@ function ContentManagement() {
       );
     }
   };
-
-  const {
-    data: AllBlogs = [],
-    isLoading: AllBlogLoading,
-    refetch: Allblogrefetch,
-  } = useQuery({
-    queryKey: "all blogs",
-    queryFn: async () => {
-      const allblogs = await axiosapi.post("allblog");
-      return allblogs.data;
-    },
-  });
-  console.log(AllBlogs);
 
   return (
     <>
@@ -196,37 +199,7 @@ function ContentManagement() {
         </div>
 
         {/* // publised blogs */}
-        <div className="border-2 flex gap-6">
-          {AllBlogs?.map((blog) => (
-            <div className="card bg-base-100  shadow-xl">
-              <figure>
-                <img src={blog?.imageUrl} alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{blog.title}</h2>
-                <div
-                  className="content-preview"
-                  dangerouslySetInnerHTML={{ __html: blog.content }}
-                />
-                <div className="card-actions justify-end">
-                  {blog.status !== "Published" ? (
-                    data?.role === "admin" ? (
-                      <button className="btn btn-primary">Publish</button>
-                    ) : (
-                      <button disabled className="btn btn-secondary">
-                        Wait for Admin
-                      </button>
-                    )
-                  ) : (
-                    <button className="btn btn-secondary">
-                      Already Published
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Blogcard AllBlogs={AllBlogs} data={data} refetch={Allblogrefetch} />
       </div>
     </>
   );

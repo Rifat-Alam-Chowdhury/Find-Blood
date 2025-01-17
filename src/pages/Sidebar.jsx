@@ -19,7 +19,7 @@ function Sidebar() {
     },
     enabled: !!user?.email,
   });
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className=" h-screen w-20 lg:w-80">

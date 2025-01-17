@@ -83,9 +83,7 @@ const router = createBrowserRouter([
         path: "dashboard/content-management",
         element: (
           <CheackAdmin>
-            <CheackVolunteer>
-              <ContentManageMent />
-            </CheackVolunteer>
+            <ContentManageMent />
           </CheackAdmin>
         ),
       },
