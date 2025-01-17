@@ -21,7 +21,11 @@ function SearchDonnerPage() {
     date: "",
   });
 
-  const { data: Alldonner = [], isLoading } = useQuery({
+  const {
+    data: Alldonner = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["allDonners", filters],
     queryFn: async () => {
       const params = new URLSearchParams(filters).toString();
@@ -29,7 +33,7 @@ function SearchDonnerPage() {
       return response.data;
     },
   });
-  console.log(Alldonner);
+  console.log(Alldonner.requestedperson);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +49,7 @@ function SearchDonnerPage() {
 
   const handleRequest = async (e) => {
     const req = AxiosPublic.post("request", { email: user?.email, post: e });
+    refetch();
     console.log(user?.email, "has requested on this", e);
   };
 
@@ -134,7 +139,7 @@ function SearchDonnerPage() {
                       <td>{donner.hospitalName}</td>
                       <td>{donner.postedby}</td>
                       <th>
-                        {donner.requestedPerson.email === user?.email ? (
+                        {donner?.requestedperson?.includes(user?.email) ? (
                           <button className="btn btn-ghost btn-xs">
                             already requested
                           </button>

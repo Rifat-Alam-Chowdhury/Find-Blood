@@ -51,6 +51,7 @@ function Register() {
         image: imgUrl,
         status,
         role,
+        requestedPosts: {},
       };
 
       const res = await axios.post(

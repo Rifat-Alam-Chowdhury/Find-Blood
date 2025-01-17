@@ -6,6 +6,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { Link, useParams } from "react-router-dom";
 import LoaderSpinner from "../components/LoaderSpinner";
 import styled from "styled-components";
+import Dashboardcard from "../components/Dashboardcard";
 
 function DashBoardPage() {
   const { user } = useContext(AUthfirebase);
@@ -44,7 +45,7 @@ function DashBoardPage() {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading && toloading ? (
         <LoaderSpinner />
       ) : (
         <div className="border-2 w-full p-7 border-green-300">
@@ -55,8 +56,6 @@ function DashBoardPage() {
 
           {data?.role !== "admin" ? (
             <div className="p-8">
-              <h1>You have requested on...</h1>
-
               {MydonaitonData?.length > 0 ? (
                 <table className="table">
                   {/* Table Head */}
@@ -99,11 +98,15 @@ function DashBoardPage() {
                   </tfoot>
                 </table>
               ) : (
-                <p>No donation requests found.</p>
+                <p></p>
               )}
             </div>
           ) : (
-            <div>hello</div>
+            <>
+              {" "}
+              <Dashboardcard />
+              <div>hello</div>
+            </>
           )}
         </div>
       )}
