@@ -19,7 +19,7 @@ function Sidebar() {
     },
     enabled: !!user?.email,
   });
-  // console.log(data);
+  console.log(data);
 
   return (
     <div className=" h-screen w-20 lg:w-80">
@@ -33,7 +33,13 @@ function Sidebar() {
           <>
             <Link to={"/DashBoard/AllUsers"}>All Users</Link>
             <Link to={"All-donation-requests"}>All Blood Requests</Link>
+            <Link to={"dashboard/content-management"}>Mange Content</Link>
           </>
+        ) : (
+          ""
+        )}
+        {data?.data?.message === "Volunteer access" ? (
+          <Link to={"dashboard/content-management"}>Mange Content</Link>
         ) : (
           ""
         )}

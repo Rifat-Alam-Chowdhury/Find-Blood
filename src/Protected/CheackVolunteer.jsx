@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { AUthfirebase } from "../Auth/AuthApi";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import LoaderSpinner from "../components/LoaderSpinner";
 
-function CheackAdmin({ children }) {
+function CheackVolunteer({ children }) {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AUthfirebase);
   const {
@@ -12,7 +12,7 @@ function CheackAdmin({ children }) {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["isadmin"],
+    queryKey: ["isvolunteer"],
     queryFn: async () => {
       const res = await axiosPublic.post(`isadmin/${user?.email}`);
       return res;
@@ -23,14 +23,11 @@ function CheackAdmin({ children }) {
   if (isLoading) {
     return <LoaderSpinner />;
   }
-  if (data?.data?.message === "admin access") {
-    return children;
-  }
   if (data?.data?.message === "Volunteer access") {
     return children;
   } else {
-    return <div>warning access denyss from check admin page</div>;
+    return <div>warning access deny from check vlunteer</div>;
   }
 }
 
-export default CheackAdmin;
+export default CheackVolunteer;

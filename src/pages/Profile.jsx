@@ -23,7 +23,7 @@ function Profile() {
   } = useQuery({
     queryKey: "userprofile",
     queryFn: async () => {
-      const data = await axiosapi.post("Dashboard/profile", {
+      const data = await axiosapi.post("profilepage", {
         email: user?.email,
       });
       return data.data;
@@ -77,7 +77,9 @@ function Profile() {
                 <h2 className="text-base/7 font-semibold text-gray-900">
                   Profile
                 </h2>
-                <p className="mt-1 text-sm/6 text-gray-600">Welcome</p>
+                <p className="mt-1 text-sm/6 text-gray-600">
+                  Welcome {data?.role}
+                </p>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-4">

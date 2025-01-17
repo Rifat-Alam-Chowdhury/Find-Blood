@@ -17,6 +17,8 @@ import MyDonations from "./pages/MyDonations";
 import AllUsers from "./pages/AllUsers";
 import AdminAllBloodDonation from "./pages/AdminAllBloodDonation";
 import CheackAdmin from "./Protected/CheackAdmin";
+import ContentManageMent from "./pages/ContentManageMent";
+import CheackVolunteer from "./Protected/CheackVolunteer";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +78,16 @@ const router = createBrowserRouter([
       {
         path: "/DashBoard/AllUsers",
         element: <AllUsers />,
+      },
+      {
+        path: "dashboard/content-management",
+        element: (
+          <CheackAdmin>
+            <CheackVolunteer>
+              <ContentManageMent />
+            </CheackVolunteer>
+          </CheackAdmin>
+        ),
       },
     ],
   },
