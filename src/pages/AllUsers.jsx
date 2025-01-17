@@ -31,6 +31,17 @@ function AllUsers() {
       refetch();
     }
   };
+  const HandleChangeRole = async (e, _id) => {
+    console.log(e, _id);
+
+    const ChangeRole = await AxiosPublic.post(`Changerole`, {
+      id: _id,
+      role: e,
+    });
+    if (ChangeRole.status === 200) {
+      refetch();
+    }
+  };
 
   return (
     <>
@@ -40,7 +51,10 @@ function AllUsers() {
             <tr>
               <th>avatar</th>
               <th>name</th>
-              <th>email</th> <th>role</th> <th>Status</th>
+              <th>email</th>
+              <th>role</th>
+              <th>Change</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -56,8 +70,32 @@ function AllUsers() {
                 </td>
                 <td>{donner?.name}</td>
                 <td>{donner.email}</td>
-                <td>{donner.role}</td> <td>{donner.status}</td>
-                {donner.role == "admin" ? (
+                <td>{donner.role}</td>
+                <td>
+                  <select
+                    onChange={(e) => {
+                      HandleChangeRole(e.target.value, donner._id);
+                    }}
+                    name=""
+                    id=""
+                  >
+                    <option value="" disabled selected>
+                      {donner.role}
+                    </option>
+                    <option disabled={donner.role === "admin"} value="admin">
+                      Admin
+                    </option>
+                    <option
+                      disabled={donner.role === "Volunteer"}
+                      value="volunteer"
+                    >
+                      Volunteer
+                    </option>
+                  </select>
+                </td>
+                <td>{donner.status}</td>
+
+                {donner.role === "admin" ? (
                   ""
                 ) : (
                   <th>
