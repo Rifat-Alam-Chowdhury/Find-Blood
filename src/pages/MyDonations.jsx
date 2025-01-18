@@ -34,6 +34,7 @@ function MyDonations() {
               <th>donation date</th>
               <th>donation time</th>
               <th>blood group</th>
+
               <th>donation status</th>
             </tr>
           </thead>
@@ -52,6 +53,7 @@ function MyDonations() {
                       <td>{data.donationDate}</td>
                       <td>{data.donationTime}</td>
                       <td>{data.bloodGroup}</td>
+
                       <td>{data.donationStatus}</td>
                     </tr>
                   );

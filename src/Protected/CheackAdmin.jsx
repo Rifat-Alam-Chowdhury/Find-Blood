@@ -21,7 +21,11 @@ function CheackAdmin({ children }) {
   });
   //   console.log(data?.data?.message);
   if (isLoading) {
-    return <LoaderSpinner />;
+    return (
+      <div className="w-full flex justify-center my-auto">
+        <LoaderSpinner />;
+      </div>
+    );
   }
   if (data?.data?.message === "admin access") {
     return children;
@@ -29,7 +33,11 @@ function CheackAdmin({ children }) {
   if (data?.data?.message === "Volunteer access") {
     return children;
   } else {
-    return <div>warning access denyss from check admin page</div>;
+    return (
+      <div className="w-full flex justify-center my-auto">
+        <LoaderSpinner />;
+      </div>
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AUthfirebase } from "../Auth/AuthApi";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
@@ -19,31 +19,101 @@ function Sidebar() {
     },
     enabled: !!user?.email,
   });
-  // console.log(data);
+  console.log(data);
 
   return (
-    <div className=" h-screen w-20 lg:w-80">
+    <div className=" h-screen w-20 lg:w-80 text-center ">
+      {data?.data?.message === "admin access" && <h1>Hello Admin</h1>}
+      {data?.data?.message === "Volunteer access" && <h1>Hello Volunteer</h1>}
+      {data?.data?.message !== "admin access" &&
+        data?.data?.message !== "Volunteer access" && <h1>Hello Donor</h1>}
       {/* controls */}
-      <div className="flex flex-col p-0 lg:p-4 ">
+      <div className="flex flex-col p-0 lg:p-4 border-2 space-y-6 mt-8">
         <Link to={"/"}>Home</Link>
-        <Link to={"/DashBoard/profile"}>Profile</Link>
-        <Link to={"DashBoard"}>Dashboard</Link>
-        <Link to={"my-donation-requests"}>My DOnation Request</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white bg-red-300  " : "bg-transparent "
+          }
+          to={"/DashBoard/profile"}
+        >
+          Profile
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white bg-red-300  " : "bg-transparent "
+          }
+          to={"/DashBoard"}
+        >
+          Dashboard
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white bg-red-300  " : "bg-transparent "
+          }
+          to={"my-donation-requests"}
+        >
+          My DOnation Request
+        </NavLink>
         {data?.data?.message === "admin access" ? (
           <>
-            <Link to={"/DashBoard/AllUsers"}>All Users</Link>
-            <Link to={"All-donation-requests"}>All Blood Requests</Link>
-            <Link to={"dashboard/content-management"}>Mange Content</Link>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-white bg-red-300  " : "bg-transparent "
+              }
+              to={"/DashBoard/AllUsers"}
+            >
+              All Users
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-white bg-red-300  " : "bg-transparent "
+              }
+              to={"All-donation-requests"}
+            >
+              All Blood Requests
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-white bg-red-300  " : "bg-transparent "
+              }
+              to={"dashboard/content-management"}
+            >
+              Mange Content
+            </NavLink>
           </>
         ) : (
           ""
         )}
         {data?.data?.message === "Volunteer access" ? (
-          <Link to={"dashboard/content-management"}>Mange Content</Link>
+          <>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-white bg-red-300  " : "bg-transparent "
+              }
+              to={"dashboard/content-management"}
+            >
+              Mange Content
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-white bg-red-300  " : "bg-transparent "
+              }
+              to={"All-donation-requests"}
+            >
+              All Blood Requests
+            </NavLink>
+          </>
         ) : (
           ""
         )}
-        <Link to={"/DashBoard/create-donation-request"}>Request Donation </Link>
+        <Link
+          className={({ isActive }) =>
+            isActive ? "text-white bg-red-300  " : "bg-transparent "
+          }
+          to={"/DashBoard/create-donation-request"}
+        >
+          Request Donation{" "}
+        </Link>
       </div>
     </div>
   );
