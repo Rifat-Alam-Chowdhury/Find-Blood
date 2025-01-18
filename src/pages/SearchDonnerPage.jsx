@@ -28,12 +28,13 @@ function SearchDonnerPage() {
   } = useQuery({
     queryKey: ["allDonners", filters],
     queryFn: async () => {
-      const params = new URLSearchParams(filters).toString();
-      const response = await AxiosPublic(`alldoners?${params}`);
+      const response = await AxiosPublic(`alldoners`, {
+        params: { Filter: filters },
+      });
       return response.data;
     },
   });
-  console.log(Alldonner.requestedperson);
+  console.log(Alldonner);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +43,6 @@ function SearchDonnerPage() {
       group: formData.get("group") || "",
       division: formData.get("Divisions") || "",
       district: formData.get("district") || "",
-      date: formData.get("date") || "",
     };
     setFilters(updatedFilters);
   };
@@ -88,14 +88,6 @@ function SearchDonnerPage() {
               ))}
             </select>
 
-            <label className="input input-bordered flex items-center gap-2">
-              <input
-                type="date"
-                className="grow"
-                name="date"
-                defaultValue={new Date().toISOString().split("T")[0]}
-              />
-            </label>
             <button type="submit" className="btn">
               Search
             </button>
@@ -112,49 +104,36 @@ function SearchDonnerPage() {
               <table className="table">
                 <thead>
                   <tr>
+                    <th>Image</th>
+                    <th>Name</th>
                     <th>Blood Group</th>
                     <th>District</th>
                     <th>Division</th>
-                    <th>Date</th>
-                    <th>Hospital</th>
                     <th>Contact</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {Alldonner?.map((donner) => (
-                    <tr key={donner._id}>
+                    <tr>
                       <td>
                         <div className="flex items-center gap-3">
-                          <div>
-                            <div className="font-bold">{donner.name}</div>
-                            <div className="text-sm opacity-50">
-                              {donner.bloodGroup}
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12">
+                              <img
+                                src={donner?.image}
+                                alt="Avatar Tailwind CSS Component"
+                              />
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td>{donner.recipientDistrict}</td>
-                      <td>{donner.recipientUpazila}</td>
-                      <td>{donner.donationDate}</td>
-                      <td>{donner.hospitalName}</td>
-                      <td>{donner.postedby}</td>
-                      <th>
-                        {donner?.requestedperson?.includes(user?.email) ? (
-                          <button className="btn btn-ghost btn-xs">
-                            already requested
-                          </button>
-                        ) : (
-                          <button
-                            disabled={user?.email === donner.postedby}
-                            onClick={() => {
-                              handleRequest(donner._id);
-                            }}
-                            className="btn btn-ghost btn-xs"
-                          >
-                            Request
-                          </button>
-                        )}
-                      </th>
+                      <td>{donner?.name}</td>
+                      <td>{donner?.bloodGroup}</td>
+                      <td>{donner?.district}</td>
+                      <td>{donner?.division}</td>
+                      <td>{donner?.email}</td>
+                      <td>{donner?.status}</td>
                     </tr>
                   ))}
                 </tbody>

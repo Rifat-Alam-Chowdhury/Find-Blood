@@ -28,10 +28,10 @@ function Navbar() {
 
       <li>
         <NavLink
-          to="/donner"
+          to="/BloodDonationrequests"
           className={({ isActive }) => (isActive ? "text-red-700" : "")}
         >
-          Donner
+          Blood Donation requests
         </NavLink>
       </li>
 

@@ -3,14 +3,18 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 import React, { useContext } from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AUthfirebase } from "../Auth/AuthApi";
 
 function Login() {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
   const { LogIn } = useContext(AUthfirebase);
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+  console.log("state in the location login page", location.state);
 
   const HandleLogin = async (e) => {
     e.preventDefault();
@@ -18,7 +22,7 @@ function Login() {
     const Password = e.target.Password.value;
     await LogIn(email, Password)
       .then(() => {
-        Navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((e) => {
         alert(e);

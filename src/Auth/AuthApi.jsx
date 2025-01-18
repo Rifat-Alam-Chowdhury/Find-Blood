@@ -5,11 +5,15 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "./FirebaseAuth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 export const AUthfirebase = createContext();
 function AuthApi({ children }) {
+  const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
+  const [isloading, setisloading] = useState(true);
   const provider = new GoogleAuthProvider();
   const CreateUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -22,8 +26,24 @@ function AuthApi({ children }) {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        setisloading(false);
+        setUser(currentUser);
+        axiosPublic("/").then((res) => {
+          const filteredData = res.data.filter(
+            (item) => item.email === currentUser.email
+          );
+
+          updateProfile(auth.currentUser, {
+            displayName: filteredData[0].name,
+          });
+        });
+
+        console.log("user =>", currentUser);
+      }
       console.log("user =>", currentUser);
+      // setUser(null);
+      setisloading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -33,6 +53,7 @@ function AuthApi({ children }) {
     SignOutUser,
     user,
     LogIn,
+    isloading,
   };
 
   return (
