@@ -9,6 +9,11 @@ import styled from "styled-components";
 import Dashboardcard from "../components/Dashboardcard";
 import Bloodreqeditmodal from "../components/Bloodreqeditmodal";
 
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/dist/sweetalert2.css";
+
+("sweetalert2/src/sweetalert2.scss");
+
 function DashBoardPage() {
   const { user } = useContext(AUthfirebase);
   const [doner, setdoner] = useState(null);
@@ -44,6 +49,30 @@ function DashBoardPage() {
   const recentDonations = MydonaitonData?.filter((item) => item.postedtime)
     .sort((a, b) => new Date(a.postedtime) - new Date(b.postedtime))
     .slice(-3);
+
+  const handledlt = async (e) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await Axiospublic.post(`deletePost`, { _id: e });
+        if (res.status === 200) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <>
@@ -103,7 +132,13 @@ function DashBoardPage() {
                           {data?.donationStatus === "Inprogress" && (
                             <>
                               <div className="flex gap-5 items-center">
-                                <button>Done</button>
+                                <button
+                                  onClick={() => {
+                                    handledlt(data?._id);
+                                  }}
+                                >
+                                  Delete
+                                </button>
                                 <button>Cancel</button>
                                 <Link to={`editBloodreq/${data?._id}`}>
                                   Edit
