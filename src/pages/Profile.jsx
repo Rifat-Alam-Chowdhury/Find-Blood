@@ -70,18 +70,42 @@ function Profile() {
           <LoaderSpinner />
         </div>
       ) : (
-        <div className="border-2 w-full p-3 ">
+        <div className="    border-e-deep-orange-800 ">
           <form onSubmit={HandleFormSubmit}>
-            <div className="space-y-12">
-              <div className="border-b border-gray-900/10 pb-12">
+            <div className="">
+              <div className=" flex gap-5 justify-center items-center  ">
+                <button
+                  type="button"
+                  onClick={() => setEdit(false)}
+                  className="text-sm/6 font-semibold text-gray-900"
+                >
+                  Cancel
+                </button>
+
+                {Edit ? (
+                  <button
+                    type="submit"
+                    onClick={() => setEdit(false)}
+                    className="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setEdit(true)}
+                    className="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Edit
+                  </button>
+                )}
+              </div>
+              <div className="border-b border-gray-900/10 pb-5 ">
                 <h2 className="text-base/7 font-semibold text-gray-900">
                   Profile
                 </h2>
-                <p className="mt-1 text-sm/6 text-gray-600">
-                  Welcome {data?.role}
-                </p>
+                <p className=" text-sm/6 text-gray-600">Welcome {data?.role}</p>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="mt-2 grid grid-cols-1  gap-y-2 sm:grid-cols-6">
                   <div className="sm:col-span-4">
                     <label
                       htmlFor="username"
@@ -89,9 +113,8 @@ function Profile() {
                     >
                       Name
                     </label>
-                    <div className="mt-2">
-                      <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                        <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6"></div>
+                    <div className="">
+                      <div className="flex items-center rounded-md bg-white  outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                         <input
                           disabled={!Edit}
                           id="username"
@@ -116,7 +139,7 @@ function Profile() {
                         <img
                           src={data?.image}
                           alt="User Profile"
-                          className="size-12 text-gray-300 rounded-full object-cover"
+                          className="size-20 text-gray-300 rounded-full object-cover"
                         />
                       ) : (
                         <UserCircleIcon
@@ -142,12 +165,12 @@ function Profile() {
                 </div>
               </div>
 
-              <div className="border-b border-gray-900/10 pb-12">
+              <div className=" border-gray-900/10  ">
                 <h2 className="text-base/7 font-semibold text-gray-900">
                   Address
                 </h2>
 
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-3">
                     <label
                       htmlFor="district"
@@ -244,32 +267,6 @@ function Profile() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-              <button
-                type="button"
-                className="text-sm/6 font-semibold text-gray-900"
-              >
-                Cancel
-              </button>
-
-              {Edit ? (
-                <button
-                  type="submit"
-                  onClick={() => setEdit(false)}
-                  className="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Save
-                </button>
-              ) : (
-                <button
-                  onClick={() => setEdit(true)}
-                  className="rounded-md  bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Edit
-                </button>
-              )}
             </div>
           </form>
         </div>

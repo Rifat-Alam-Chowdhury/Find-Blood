@@ -7,16 +7,15 @@ import { Link, useParams } from "react-router-dom";
 import LoaderSpinner from "../components/LoaderSpinner";
 import styled from "styled-components";
 import Dashboardcard from "../components/Dashboardcard";
+import Bloodreqeditmodal from "../components/Bloodreqeditmodal";
 
 function DashBoardPage() {
   const { user } = useContext(AUthfirebase);
   const [doner, setdoner] = useState(null);
-  const urlemail = useParams();
-
-  console.log(urlemail);
+  const [Modal, setModal] = useState(false);
 
   const Axiospublic = useAxiosPublic();
-
+  //welocme message er jonno
   const { data = [], isLoading } = useQuery({
     queryKey: "dashboarduser",
     queryFn: async () => {
@@ -27,7 +26,7 @@ function DashBoardPage() {
     },
     enabled: !!user?.email,
   });
-  console.log(data); // logiing admin
+  //welocme message er jonno
 
   const {
     data: MydonaitonData = [],
@@ -41,22 +40,36 @@ function DashBoardPage() {
     },
     enabled: data?.role === "Donor",
   });
-  console.log(MydonaitonData);
+
+  const recentDonations = MydonaitonData?.filter((item) => item.postedtime)
+    .sort((a, b) => new Date(a.postedtime) - new Date(b.postedtime))
+    .slice(-3);
 
   return (
     <>
       {isLoading && toloading ? (
-        <LoaderSpinner />
+        <>
+          <div className="w-full flex justify-end">
+            <LoaderSpinner />
+          </div>
+        </>
       ) : (
-        <div className="border-2 w-full p-7 border-green-300">
-          <div className="font-extrabold flex justify-around">
+        <div className="w-full p-7 ">
+          <div className="font-extrabold lg:flex justify-around">
             <h1>Welcome {data?.name}</h1>
             <h1>{data?.role}</h1>
+            <h1>Your Last Posted three requests are</h1>
           </div>
 
           {data?.role !== "admin" ? (
             <div className="p-8">
-              {MydonaitonData?.length > 0 ? (
+              {toloading ? (
+                <>
+                  <div className="flex justify-center items-center">
+                    <LoaderSpinner />
+                  </div>
+                </>
+              ) : MydonaitonData?.length > 0 ? (
                 <table className="table">
                   {/* Table Head */}
                   <thead>
@@ -68,12 +81,14 @@ function DashBoardPage() {
                       <th>Donation Date</th>
                       <th>Donation Time</th>
                       <th>Blood Group</th>
+                      <th>Contact</th>
                       <th>Donation Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   {/* Table Body */}
                   <tbody>
-                    {MydonaitonData.map((data, index) => (
+                    {recentDonations?.map((data, index) => (
                       <tr className="bg-base-200" key={index}>
                         <th>{index + 1}</th>
                         <td>{data.recipientName}</td>
@@ -82,7 +97,21 @@ function DashBoardPage() {
                         <td>{data.donationDate}</td>
                         <td>{data.donationTime}</td>
                         <td>{data.bloodGroup}</td>
+                        <td>{data.postedby}</td>
                         <td>{data.donationStatus}</td>
+                        <td>
+                          {data?.donationStatus === "Inprogress" && (
+                            <>
+                              <div className="flex gap-5 items-center">
+                                <button>Done</button>
+                                <button>Cancel</button>
+                                <Link to={`editBloodreq/${data?._id}`}>
+                                  Edit
+                                </Link>
+                              </div>
+                            </>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -98,14 +127,17 @@ function DashBoardPage() {
                   </tfoot>
                 </table>
               ) : (
-                <p></p>
+                <p>
+                  You have not created any blood requested post. <br /> To
+                  create one,{" "}
+                  <Link to={"create-donation-request"}>click here</Link>.
+                </p>
               )}
             </div>
           ) : (
             <>
-              {" "}
               <Dashboardcard />
-              <div>hello</div>
+              <div>hello admin</div>
             </>
           )}
         </div>

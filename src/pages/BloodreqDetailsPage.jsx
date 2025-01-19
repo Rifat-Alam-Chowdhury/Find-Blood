@@ -12,7 +12,6 @@ function BloodreqDetailsPage() {
   const axiosPublic = useAxiosPublic();
   const [ModalOpen, setModalOpen] = useState(false);
   const [Id, setId] = useState(null);
-  console.log(Id);
 
   const {
     data: Bloodreq = [],
@@ -21,11 +20,10 @@ function BloodreqDetailsPage() {
   } = useQuery({
     queryKey: ["single blood req"],
     queryFn: async () => {
-      const res = await axiosPublic.post("singleBloodReq", { _id: _id });
+      const res = await axiosPublic.post(`singleBloodReq/${_id}`);
       return res.data;
     },
   });
-  console.log(Bloodreq);
 
   return (
     <>

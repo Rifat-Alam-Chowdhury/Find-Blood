@@ -26,9 +26,10 @@ function AuthApi({ children }) {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       if (currentUser) {
         setisloading(false);
-        setUser(currentUser);
+
         axiosPublic("/").then((res) => {
           const filteredData = res.data.filter(
             (item) => item.email === currentUser.email

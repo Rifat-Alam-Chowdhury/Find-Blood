@@ -30,6 +30,17 @@ function AdminAllBloodDonation() {
 
   console.log(data);
 
+  const HandleStatusChange = async (status, _id) => {
+    const res = await axiospublic.post(`Status-Change-On-Blood-Req`, {
+      status: status,
+      id: _id,
+    });
+
+    if (res.data.matchedCount === 1) {
+      refetch();
+    }
+  };
+
   return (
     <>
       <div className="overflow-x-auto w-full">
@@ -44,7 +55,7 @@ function AdminAllBloodDonation() {
               <th>donation date</th>
               <th>donation time</th>
               <th>blood group</th>
-              <th>requestedperson</th>
+
               <th>donation status</th>
               <th>Posted By</th>
             </tr>
@@ -75,7 +86,7 @@ function AdminAllBloodDonation() {
                           edit
                         </button>
                       </td>
-                      <td>
+                      {/* <td>
                         <select name="" id="">
                           {data.requestedperson?.map((person, index) => (
                             <option key={index} value={person}>
@@ -83,9 +94,43 @@ function AdminAllBloodDonation() {
                             </option>
                           ))}
                         </select>
-                      </td>
+                      </td> */}
 
-                      <td>{data.donationStatus}</td>
+                      <td>
+                        {data.donationStatus !== "Completed" ? (
+                          <>
+                            <button
+                              disabled={data.donationStatus === "Inprogress"}
+                              className="btn btn-xs btn-primary"
+                              onClick={() =>
+                                HandleStatusChange("Inprogress", data._id)
+                              }
+                            >
+                              Inprogress
+                            </button>
+                            <button
+                              disabled={data.donationStatus === "Done"}
+                              className="btn btn-xs btn-primary"
+                              onClick={() =>
+                                HandleStatusChange("Done", data._id)
+                              }
+                            >
+                              Done
+                            </button>
+                            <button
+                              disabled={data.donationStatus === "Cancel"}
+                              className="btn btn-xs btn-primary"
+                              onClick={() =>
+                                HandleStatusChange("cancel", data._id)
+                              }
+                            >
+                              canceled
+                            </button>
+                          </>
+                        ) : (
+                          "Completed"
+                        )}
+                      </td>
                       {data.postedby === user.email ? (
                         <td> You</td>
                       ) : (

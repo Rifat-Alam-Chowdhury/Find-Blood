@@ -251,7 +251,7 @@ function ModalForm({ open, setopen, ModalInfo, refetch, role }) {
               >
                 Requested Persons
               </label>
-              <select
+              {/* <select
                 id="requestedPerson"
                 name="requestedperson"
                 disabled={role === "Volunteer"}
@@ -264,7 +264,7 @@ function ModalForm({ open, setopen, ModalInfo, refetch, role }) {
                     {person}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </div>
 
             <div>

@@ -37,7 +37,7 @@ function Navbar() {
 
       <li>
         <NavLink
-          to="/blog"
+          to="/Blogs"
           className={({ isActive }) => (isActive ? "text-red-700" : "")}
         >
           Blog

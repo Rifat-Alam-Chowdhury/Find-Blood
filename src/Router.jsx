@@ -22,6 +22,8 @@ import CheackVolunteer from "./Protected/CheackVolunteer";
 import BloodDonationrequests from "./pages/BloodDonationrequests";
 import BloodreqDetailsPage from "./pages/BloodreqDetailsPage";
 import Privatefirebase from "./Protected/Privatefirebase";
+import Blog from "./pages/Blog";
+import BloodReqEditPage from "./components/BloodReqEditPage";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +51,10 @@ const router = createBrowserRouter([
         element: <SearchDonnerPage />,
       },
       {
+        path: "/Blogs",
+        element: <Blog />,
+      },
+      {
         path: "/BloodreqDetailsPage",
         element: (
           <Privatefirebase>
@@ -59,11 +65,15 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/DashBoard",
-    element: <DashBoard />,
+    path: "DashBoard",
+    element: (
+      <Privatefirebase>
+        <DashBoard />
+      </Privatefirebase>
+    ),
     children: [
       {
-        path: "/DashBoard/:email",
+        path: "/DashBoard",
         element: <DashBoardPage></DashBoardPage>,
       },
       {
@@ -87,16 +97,20 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/DashBoard/AllUsers",
+        path: "AllUsers",
         element: <AllUsers />,
       },
       {
-        path: "dashboard/content-management",
+        path: "content-management",
         element: (
           <CheackAdmin>
             <ContentManageMent />
           </CheackAdmin>
         ),
+      },
+      {
+        path: "editBloodreq/:id",
+        element: <BloodReqEditPage />,
       },
     ],
   },

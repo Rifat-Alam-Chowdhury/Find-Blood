@@ -7,33 +7,13 @@ import Sidebar from "./Sidebar";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 function DashBoard() {
-  const axiosPublic = useAxiosPublic();
-  const { user } = useContext(AUthfirebase);
-  // const { data = [], isLoading } = useQuery({
-  //   queryKey: ["alldata", user?.email],
-  //   queryFn: async () => {
-  //     const res = await axiosPublic.post(`Dashboard`, { email: user?.email });
-  //     return res.data;
-  //   },
-  //   enabled: !!user?.email,
-  // });
-
-  // const {
-  //   status = "",
-  //   role = "",
-  //   name = "",
-  //   image = "",
-  //   email = "",
-  //   district = "",
-  //   bloodGroup = "",
-  // } = data?.data || {};
-
   return (
     <div>
-      <div className="flex">
+      <div className="flex h-screen rounded-xl">
         <Sidebar />
-
-        <Outlet />
+        <div className="flex-1 bg-gray-100 p-6 overflow-y-auto">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

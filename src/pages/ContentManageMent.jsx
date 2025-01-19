@@ -194,7 +194,10 @@ function ContentManagement() {
             value={content}
             config={config}
             tabIndex={1}
-            onBlur={(newContent) => setContent(newContent)}
+            onBlur={() => {
+              const plainContent = editor.current?.editor.getEditorValue();
+              setContent(plainContent);
+            }}
           />
         </div>
 

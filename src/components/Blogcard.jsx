@@ -4,7 +4,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 function Blogcard({ AllBlogs = [], data = [], refetch }) {
   const axiosPublic = useAxiosPublic();
-  //blog status
+  console.log(AllBlogs);
 
   const HandleblogPostStatus = async (status, post) => {
     console.log(status, post);
@@ -18,7 +18,7 @@ function Blogcard({ AllBlogs = [], data = [], refetch }) {
     }
     return console.log(res.data.acknowledged);
   };
-  //   console.log(data);
+
   return (
     <div className="border-2 flex gap-6">
       {AllBlogs?.map((blog) => (

@@ -36,6 +36,7 @@ function DonationCreate() {
     requestMessage: "",
     donationStatus: "Pending",
     postedby: data?.email,
+    postedtime: new Date(),
   });
 
   const handleInputChange = (e) => {
@@ -48,14 +49,19 @@ function DonationCreate() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
     api();
   };
 
   const api = async () => {
-    await axios.post("http://localhost:3000/Dashboard/blood/Req", {
+    const res = await axios.post("http://localhost:3000/Dashboard/blood/Req", {
       Info: formData,
     });
+
+    console.log(res.status);
+    if (res.status === 200) {
+      alert("Post Created");
+    }
   };
 
   return (

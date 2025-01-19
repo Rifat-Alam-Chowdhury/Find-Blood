@@ -19,20 +19,21 @@ function Sidebar() {
     },
     enabled: !!user?.email,
   });
-  console.log(data);
 
   return (
-    <div className=" h-screen w-20 lg:w-80 text-center ">
+    <div className=" h-screen w-64 text-center  pt-9 space-y-11 ">
       {data?.data?.message === "admin access" && <h1>Hello Admin</h1>}
       {data?.data?.message === "Volunteer access" && <h1>Hello Volunteer</h1>}
       {data?.data?.message !== "admin access" &&
         data?.data?.message !== "Volunteer access" && <h1>Hello Donor</h1>}
       {/* controls */}
-      <div className="flex flex-col p-0 lg:p-4 border-2 space-y-6 mt-8">
+      <div className="flex flex-col  space-y-8 ">
         <Link to={"/"}>Home</Link>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "text-white bg-red-300  " : "bg-transparent "
+            isActive
+              ? "text-white bg-red-300     p-2 rounded-xl "
+              : "bg-transparent "
           }
           to={"/DashBoard/profile"}
         >
@@ -40,15 +41,20 @@ function Sidebar() {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "text-white bg-red-300  " : "bg-transparent "
+            isActive
+              ? "text-white bg-red-300   p-2 rounded-xl   "
+              : "bg-transparent "
           }
           to={"/DashBoard"}
+          end
         >
           Dashboard
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "text-white bg-red-300  " : "bg-transparent "
+            isActive
+              ? "text-white bg-red-300   p-2 rounded-xl   "
+              : "bg-transparent "
           }
           to={"my-donation-requests"}
         >
@@ -58,7 +64,9 @@ function Sidebar() {
           <>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "text-white bg-red-300  " : "bg-transparent "
+                isActive
+                  ? "text-white bg-red-300   p-2 rounded-xl   "
+                  : "bg-transparent "
               }
               to={"/DashBoard/AllUsers"}
             >
@@ -66,7 +74,9 @@ function Sidebar() {
             </NavLink>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "text-white bg-red-300  " : "bg-transparent "
+                isActive
+                  ? "text-white bg-red-300   p-2 rounded-xl   "
+                  : "bg-transparent "
               }
               to={"All-donation-requests"}
             >
@@ -74,7 +84,9 @@ function Sidebar() {
             </NavLink>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "text-white bg-red-300  " : "bg-transparent "
+                isActive
+                  ? "text-white bg-red-300   p-2 rounded-xl   "
+                  : "bg-transparent "
               }
               to={"dashboard/content-management"}
             >
@@ -88,15 +100,19 @@ function Sidebar() {
           <>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "text-white bg-red-300  " : "bg-transparent "
+                isActive
+                  ? "text-white bg-red-300   p-2 rounded-xl   "
+                  : "bg-transparent "
               }
-              to={"dashboard/content-management"}
+              to={"content-management"}
             >
               Mange Content
             </NavLink>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "text-white bg-red-300  " : "bg-transparent "
+                isActive
+                  ? "text-white bg-red-300   p-2 rounded-xl   "
+                  : "bg-transparent "
               }
               to={"All-donation-requests"}
             >
@@ -106,14 +122,16 @@ function Sidebar() {
         ) : (
           ""
         )}
-        <Link
+        <NavLink
           className={({ isActive }) =>
-            isActive ? "text-white bg-red-300  " : "bg-transparent "
+            isActive
+              ? "text-white bg-red-300   p-2 rounded-xl   "
+              : "bg-transparent "
           }
           to={"/DashBoard/create-donation-request"}
         >
           Request Donation{" "}
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

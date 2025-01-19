@@ -7,17 +7,17 @@ function BloodDonationrequests() {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const {
-    data: PendingBloodReq = [],
+    data: PendingBloodReqs = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryFn: ["PendingBloodRequests"],
+    querykey: ["PendingBloodRequestsss"],
     queryFn: async () => {
       const res = await axiosPublic(`PendingBloodReq`);
       return res.data;
     },
   });
-  console.log(PendingBloodReq);
+  console.log(PendingBloodReqs);
 
   return (
     <>
@@ -35,7 +35,7 @@ function BloodDonationrequests() {
           </thead>
           <tbody>
             {/* row 1 */}
-            {PendingBloodReq?.map((data) => (
+            {PendingBloodReqs?.map((data) => (
               <tr>
                 <td>{data?.recipientName}</td>
                 <td>{data?.fullAddress}</td>

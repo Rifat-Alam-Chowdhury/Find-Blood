@@ -18,7 +18,7 @@ function MyDonations() {
     },
     enabled: !!user?.email,
   });
-  console.log(MydonaitonData);
+  console.log(MydonaitonData); //all ok comming from database
 
   return (
     <>
