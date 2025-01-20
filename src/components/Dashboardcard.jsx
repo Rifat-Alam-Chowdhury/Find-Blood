@@ -17,8 +17,8 @@ function Dashboardcard() {
 
   return (
     <>
-      <div className="flex">
-        <div className="card p-6 card-compact  w-96 shadow-xl">
+      <div className="flex flex-col lg:flex-row gap-5">
+        <div className="card bg-cyan-100 p-6 card-compact  w-96 shadow-xl">
           <div className="card-body  ">
             <div className="  flex justify-around">
               <div className="  p-3 ">
@@ -35,7 +35,7 @@ function Dashboardcard() {
           </div>
         </div>
         {/* card2 */}
-        <div className="card p-6 card-compact w-96 shadow-xl">
+        <div className="card bg-red-200 p-6 card-compact w-96 shadow-xl">
           <div className="card-body">
             <div className="flex justify-around">
               <div className="p-3">
@@ -53,7 +53,7 @@ function Dashboardcard() {
         </div>
 
         {/* card3 */}
-        <div className="card p-6 card-compact w-96 shadow-xl">
+        <div className="card bg-cyan-200 p-6 card-compact w-96 shadow-xl">
           <div className="card-body">
             <div className="flex justify-around">
               <div className="p-3">

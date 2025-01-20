@@ -349,7 +349,7 @@ function DonationCreate() {
         </div>
       ) : (
         <>
-          <div className=" flex justify-center font-extrabold p-20 text-4xl">
+          <div className=" flex justify-center font-extrabold p-20 lg:text-4xl">
             Sorry Your Are Blocked... <br /> ...please contact Admin
           </div>
         </>

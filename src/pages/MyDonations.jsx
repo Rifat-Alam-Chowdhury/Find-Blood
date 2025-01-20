@@ -72,10 +72,10 @@ function MyDonations() {
         </select>
       </div>
 
-      <div className="overflow-x-auto w-full">
+      <div className="overflow-x-auto rounded-xl w-full">
         <table className="table">
           {/* Table Head */}
-          <thead className="text-center">
+          <thead className="text-center bg-red-200 ">
             <tr>
               <th>#</th>
               <th>Recipient Name</th>
@@ -91,47 +91,64 @@ function MyDonations() {
           </thead>
           {/* Table Body */}
           <tbody>
-            {filteredData?.map((data, index) => (
-              <tr className="bg-base-200" key={index}>
-                <th>{index + 1}</th>
-                <td>{data.recipientName}</td>
-                <td>{data.recipientDistrict}</td>
-                <td>{data.recipientUpazila}</td>
-                <td>{data.donationDate}</td>
-                <td>{data.donationTime}</td>
-                <td>{data.bloodGroup}</td>
-                <td>{data.postedby}</td>
-                <td>{data.donationStatus}</td>
-                <td>
-                  {data?.donationStatus === "Inprogress" && (
-                    <>
+            {filteredData?.length > 0 ? (
+              filteredData.map((data) => (
+                <tr className="bg-base-200" key={data?._id}>
+                  <th>{data?.index + 1}</th>
+                  <td>{data?.recipientName}</td>
+                  <td>{data?.recipientDistrict}</td>
+                  <td>{data?.recipientUpazila}</td>
+                  <td>{data?.donationDate}</td>
+                  <td>{data?.donationTime}</td>
+                  <td>{data?.bloodGroup}</td>
+                  <td>{data?.postedby}</td>
+                  <td>{data?.donationStatus}</td>
+                  <td>
+                    {data?.donationStatus === "Inprogress" ? (
                       <div className="flex gap-5 items-center">
                         <button
-                          onClick={() => {
-                            handledlt(data?._id);
-                          }}
+                          onClick={() => handledlt(data?._id)}
+                          className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                         >
                           Delete
                         </button>
-                        <button>Cancel</button>
-                        <Link to={`/DashBoard/editBloodreq/${data?._id}`}>
+                        <button className="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600">
+                          Cancel
+                        </button>
+                        <Link
+                          to={`/DashBoard/editBloodreq/${data?._id}`}
+                          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        >
                           Edit
                         </Link>
                       </div>
-                    </>
-                  )}
+                    ) : (
+                      "You have not made any post"
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="10" className="text-center py-4">
+                  No data available.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
+
           {/* Table Footer */}
-          <tfoot>
-            <tr>
-              <td colSpan="8" className="text-center">
-                <Link to="/DashBoard/my-donation-requests">View more</Link>
-              </td>
-            </tr>
-          </tfoot>
+          {filteredData?.length > 0 ? (
+            <tfoot>
+              <tr>
+                <td colSpan="8" className="text-center">
+                  <Link to="/DashBoard/my-donation-requests">View more</Link>
+                </td>
+              </tr>
+            </tfoot>
+          ) : (
+            ""
+          )}
         </table>
       </div>
     </>

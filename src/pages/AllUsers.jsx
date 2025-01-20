@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import axios from "axios";
+import useAxios from "../Hooks/useAxios";
+import { AUthfirebase } from "../Auth/AuthApi";
 
 function AllUsers() {
   const AxiosPublic = useAxiosPublic();
+  const axiosInterface = useAxios();
   const [filterStatus, setFilterStatus] = useState("all");
+  const { user } = useContext(AUthfirebase);
 
   const {
     data = [],
@@ -14,7 +18,7 @@ function AllUsers() {
   } = useQuery({
     queryKey: ["all user"],
     queryFn: async () => {
-      const res = await AxiosPublic();
+      const res = await axiosInterface(`users/${user?.email}`);
       return res.data;
     },
   });
@@ -50,20 +54,23 @@ function AllUsers() {
 
   return (
     <>
-      <div className="flex justify-end mb-2">
+      <div className="flex justify-between mb-2 border-t-red-900">
+        <div className="font-extrabold">
+          <h1>All blood requests from those in urgent need of donations.</h1>
+        </div>
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
-          className=" p-1 rounded-xl"
+          className=" p-1 rounded-xl border-2 border-red-300"
         >
           <option value="all">All Statuses</option>
           <option value="active">Active</option>
           <option value="Block">Blocked</option>
         </select>
       </div>
-      <div className="overflow-x-hidden h-screen">
-        <table className="table font-extrabold">
-          <thead className="text-center">
+      <div className="overflow-x-hidden h-screen rounded-xl">
+        <table className="table font-extrabold ">
+          <thead className="text-center bg-red-300">
             <tr>
               <th>avatar</th>
               <th>name</th>
@@ -74,7 +81,7 @@ function AllUsers() {
               <th>action</th>
             </tr>
           </thead>
-          <tbody className="text-center">
+          <tbody className="text-center bg-cyan-100">
             {filteredData?.map((donner) => (
               <tr key={donner._id}>
                 <td>
@@ -122,6 +129,7 @@ function AllUsers() {
                         onClick={() => {
                           HandleBlock(donner._id);
                         }}
+                        className="btn-xs bg-red-300 rounded-xl"
                       >
                         block
                       </button>
@@ -130,7 +138,7 @@ function AllUsers() {
                         onClick={() => {
                           HandleUnBlock(donner._id);
                         }}
-                        className="btn btn-ghost btn-xs"
+                        className="btn-xs bg-green-300 rounded-xl"
                       >
                         Unblock
                       </button>

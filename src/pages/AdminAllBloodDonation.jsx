@@ -43,10 +43,13 @@ function AdminAllBloodDonation() {
 
   return (
     <>
-      <div className="overflow-x-auto w-full">
+      <div className="flex justify-start mb-2 border-t-red-900 font-extrabold">
+        <h1>All blood requests from those in urgent need of donations.</h1>
+      </div>
+      <div className="overflow-x-hidden h-screen rounded-xl">
         <table className="table">
           {/* head */}
-          <thead>
+          <thead className="bg-red-300">
             <tr>
               <th>#</th>
               <th>recipient name</th>
@@ -60,14 +63,14 @@ function AdminAllBloodDonation() {
               <th>Posted By</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-cyan-100">
             {/* row 1 */}
 
             {data?.allBloodRe?.length === 0
               ? "You have not made any requests"
               : data?.allBloodRe?.map((datas, index) => {
                   return (
-                    <tr className="bg-base-200" key={index}>
+                    <tr className="" key={index}>
                       <th>{index + 1}</th>
                       <td>{datas.recipientName}</td>
                       <td>{datas.recipientDistrict}</td>

@@ -165,7 +165,7 @@ function DashBoardPage() {
                   </tfoot>
                 </table>
               ) : (
-                <p className=" text-center font-extrabold text-4xl">
+                <p className=" text-center font-extrabold lg:text-4xl">
                   You have not created any blood requested post. <br /> To
                   create one,{" "}
                   <Link className="text-red-400" to={"create-donation-request"}>
@@ -178,7 +178,6 @@ function DashBoardPage() {
           ) : (
             <>
               <Dashboardcard />
-              <div>hello admin</div>
             </>
           )}
         </div>
