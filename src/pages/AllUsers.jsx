@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import axios from "axios";
 
 function AllUsers() {
   const AxiosPublic = useAxiosPublic();
+  const [filterStatus, setFilterStatus] = useState("all");
 
   const {
     data = [],
@@ -40,12 +41,29 @@ function AllUsers() {
       refetch();
     }
   };
+  console.log(data); //status
+
+  const filteredData =
+    filterStatus === "all"
+      ? data
+      : data.filter((data) => data.status === filterStatus);
 
   return (
     <>
-      <div className="overflow-x-auto p-5 w-11/12 mx-auto">
-        <table className="table">
-          <thead>
+      <div className="flex justify-end mb-2">
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
+          className=" p-1 rounded-xl"
+        >
+          <option value="all">All Statuses</option>
+          <option value="active">Active</option>
+          <option value="Block">Blocked</option>
+        </select>
+      </div>
+      <div className="overflow-x-hidden h-screen">
+        <table className="table font-extrabold">
+          <thead className="text-center">
             <tr>
               <th>avatar</th>
               <th>name</th>
@@ -53,10 +71,11 @@ function AllUsers() {
               <th>role</th>
               <th>Change</th>
               <th>Status</th>
+              <th>action</th>
             </tr>
           </thead>
-          <tbody>
-            {data?.map((donner) => (
+          <tbody className="text-center">
+            {filteredData?.map((donner) => (
               <tr key={donner._id}>
                 <td>
                   <div className="mask mask-squircle h-12 w-12">
@@ -69,13 +88,14 @@ function AllUsers() {
                 <td>{donner?.name}</td>
                 <td>{donner.email}</td>
                 <td>{donner.role}</td>
+
                 <td>
                   <select
+                    disabled={donner.role === "admin"}
                     onChange={(e) => {
                       HandleChangeRole(e.target.value, donner._id);
                     }}
-                    name=""
-                    id=""
+                    className="p-1 rounded-lg text-center"
                   >
                     <option value="" disabled selected>
                       {donner.role}
@@ -94,7 +114,7 @@ function AllUsers() {
                 <td>{donner.status}</td>
 
                 {donner.role === "admin" ? (
-                  ""
+                  <th>Admin</th>
                 ) : (
                   <th>
                     {donner.status === "active" ? (

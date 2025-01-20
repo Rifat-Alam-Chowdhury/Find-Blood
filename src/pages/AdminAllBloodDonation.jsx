@@ -28,7 +28,7 @@ function AdminAllBloodDonation() {
     },
   });
 
-  console.log(data);
+  console.log(data.role);
 
   const HandleStatusChange = async (status, _id) => {
     const res = await axiospublic.post(`Status-Change-On-Blood-Req`, {
@@ -65,76 +65,67 @@ function AdminAllBloodDonation() {
 
             {data?.allBloodRe?.length === 0
               ? "You have not made any requests"
-              : data?.allBloodRe?.map((data, index) => {
+              : data?.allBloodRe?.map((datas, index) => {
                   return (
                     <tr className="bg-base-200" key={index}>
                       <th>{index + 1}</th>
-                      <td>{data.recipientName}</td>
-                      <td>{data.recipientDistrict}</td>
-                      <td>{data.recipientUpazila}</td>
-                      <td>{data.donationDate}</td>
-                      <td>{data.donationTime}</td>
+                      <td>{datas.recipientName}</td>
+                      <td>{datas.recipientDistrict}</td>
+                      <td>{datas.recipientUpazila}</td>
+                      <td>{datas.donationDate}</td>
+                      <td>{datas.donationTime}</td>
 
                       <td className="flex justify-center gap-6 ">
-                        {data.bloodGroup}
+                        {datas.bloodGroup}
+
                         <button
+                          disabled={data?.role === "Volunteer"}
                           onClick={(e) => {
-                            SetOpenModal(data);
+                            SetOpenModal(datas);
                           }}
                           className="btn btn-xs btn-accent"
                         >
                           edit
                         </button>
                       </td>
-                      {/* <td>
-                        <select name="" id="">
-                          {data.requestedperson?.map((person, index) => (
-                            <option key={index} value={person}>
-                              {person}
-                            </option>
-                          ))}
-                        </select>
-                      </td> */}
 
                       <td>
-                        {data.donationStatus !== "Completed" ? (
-                          <>
-                            <button
-                              disabled={data.donationStatus === "Inprogress"}
-                              className="btn btn-xs btn-primary"
-                              onClick={() =>
-                                HandleStatusChange("Inprogress", data._id)
-                              }
+                        {datas.donationStatus !== "Completed" ? (
+                          <select
+                            className="select select-xs select-primary"
+                            value={datas.donationStatus}
+                            onChange={(e) =>
+                              HandleStatusChange(e.target.value, datas._id)
+                            }
+                          >
+                            <option
+                              value="Inprogress"
+                              disabled={datas.donationStatus === "Inprogress"}
                             >
                               Inprogress
-                            </button>
-                            <button
-                              disabled={data.donationStatus === "Done"}
-                              className="btn btn-xs btn-primary"
-                              onClick={() =>
-                                HandleStatusChange("Done", data._id)
-                              }
+                            </option>
+                            <option
+                              value="Done"
+                              disabled={datas.donationStatus === "Done"}
                             >
                               Done
-                            </button>
-                            <button
-                              disabled={data.donationStatus === "Cancel"}
-                              className="btn btn-xs btn-primary"
-                              onClick={() =>
-                                HandleStatusChange("cancel", data._id)
-                              }
+                            </option>
+                            <option
+                              value="Canceled"
+                              disabled={datas.donationStatus === "Canceled"}
                             >
-                              canceled
-                            </button>
-                          </>
+                              Canceled
+                            </option>
+                          </select>
                         ) : (
                           "Completed"
                         )}
                       </td>
-                      {data.postedby === user.email ? (
+
+                      {datas.postedby === user.email ? (
                         <td> You</td>
                       ) : (
-                        <td>{data.postedby}</td>
+                        <td>{datas.postedby}</td>
                       )}
                     </tr>
                   );

@@ -24,6 +24,7 @@ import BloodreqDetailsPage from "./pages/BloodreqDetailsPage";
 import Privatefirebase from "./Protected/Privatefirebase";
 import Blog from "./pages/Blog";
 import BloodReqEditPage from "./components/BloodReqEditPage";
+import Funding from "./pages/Funding";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,14 @@ const router = createBrowserRouter([
         element: (
           <Privatefirebase>
             <BloodreqDetailsPage />
+          </Privatefirebase>
+        ),
+      },
+      {
+        path: "Funding",
+        element: (
+          <Privatefirebase>
+            <Funding />
           </Privatefirebase>
         ),
       },

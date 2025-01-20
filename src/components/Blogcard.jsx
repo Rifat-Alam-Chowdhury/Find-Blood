@@ -2,9 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
-function Blogcard({ AllBlogs = [], data = [], refetch }) {
+function Blogcard({ AllBlogs = [], data = [], refetch, role }) {
   const axiosPublic = useAxiosPublic();
-  console.log(AllBlogs);
 
   const HandleblogPostStatus = async (status, post) => {
     console.log(status, post);
@@ -20,15 +19,19 @@ function Blogcard({ AllBlogs = [], data = [], refetch }) {
   };
 
   return (
-    <div className="border-2 flex gap-6">
+    <div className=" grid grid-cols-3 gap-3">
       {AllBlogs?.map((blog) => (
-        <div className="card bg-base-100  shadow-xl">
-          <figure>
-            <img src={blog?.imageUrl} alt="Shoes" />
+        <div className="card   shadow-xl mb-5 ">
+          <figure className="h-64  w-full overflow-hidden  ">
+            <img
+              src={blog?.imageUrl}
+              alt="Blog Illustration"
+              className=" object-fill"
+            />
           </figure>
-          <div className="card-body">
-            <h2 className="card-title">{blog.title}</h2>
-            <h2 className="card-title">{blog.role}</h2>
+          <div className="card-body ">
+            <h2 className="flex justify-end">{blog.title}</h2>
+            <h2 className="card-title">Posted By: {blog.role}</h2>
             <div
               className="content-preview"
               dangerouslySetInnerHTML={{ __html: blog.content }}
@@ -37,6 +40,7 @@ function Blogcard({ AllBlogs = [], data = [], refetch }) {
               {blog.status !== "Published" ? (
                 data?.role === "admin" ? (
                   <select
+                    className="p-1 rounded-lg"
                     onChange={(e) => {
                       HandleblogPostStatus(e.target.value, blog?._id);
                     }}
@@ -49,11 +53,21 @@ function Blogcard({ AllBlogs = [], data = [], refetch }) {
                   </select>
                 ) : (
                   <button disabled className="btn btn-secondary">
-                    Wait for Admin to reviwe
+                    Wait for Admin to review
                   </button>
                 )
               ) : (
-                <button className="btn btn-secondary">Already Published</button>
+                <>
+                  <button
+                    disabled={role !== "admin"}
+                    onClick={() => {
+                      HandleblogPostStatus("Draft", blog?._id);
+                    }}
+                    className="btn-xs border-2 bg-green-300 rounded-xl"
+                  >
+                    Un Published
+                  </button>
+                </>
               )}
             </div>
           </div>

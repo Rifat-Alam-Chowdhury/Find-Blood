@@ -19,15 +19,15 @@ function Blog() {
 
   return (
     <>
-      <div className="py-12 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
+      <div className="py-12 ">
+        <div className="max-w-6xl  mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800">Be a Hero</h2>
             <p className="text-gray-600 mt-2">
               Blood Donation News, Tips, and Stories
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid  md:grid-cols-3 gap-2">
             {AllBlogs.map((blog, index) => (
               <BlogPublic key={index} {...blog} />
             ))}

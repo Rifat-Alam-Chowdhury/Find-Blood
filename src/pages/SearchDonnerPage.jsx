@@ -40,9 +40,9 @@ function SearchDonnerPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const updatedFilters = {
-      group: formData.get("group") || "",
-      division: formData.get("Divisions") || "",
-      district: formData.get("district") || "",
+      bloodGroup: formData.get("group") || "",
+      recipientUpazila: formData.get("Divisions") || "",
+      recipientDistrict: formData.get("district") || "",
     };
     setFilters(updatedFilters);
   };
@@ -104,7 +104,6 @@ function SearchDonnerPage() {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Image</th>
                     <th>Name</th>
                     <th>Blood Group</th>
                     <th>District</th>
@@ -116,24 +115,12 @@ function SearchDonnerPage() {
                 <tbody>
                   {Alldonner?.map((donner) => (
                     <tr>
-                      <td>
-                        <div className="flex items-center gap-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle h-12 w-12">
-                              <img
-                                src={donner?.image}
-                                alt="Avatar Tailwind CSS Component"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>{donner?.name}</td>
+                      <td>{donner?.recipientName}</td>
                       <td>{donner?.bloodGroup}</td>
-                      <td>{donner?.district}</td>
-                      <td>{donner?.division}</td>
-                      <td>{donner?.email}</td>
-                      <td>{donner?.status}</td>
+                      <td>{donner?.recipientDistrict}</td>
+                      <td>{donner?.recipientUpazila}</td>
+                      <td>{donner?.postedby}</td>
+                      <td>{donner?.donationStatus}</td>
                     </tr>
                   ))}
                 </tbody>

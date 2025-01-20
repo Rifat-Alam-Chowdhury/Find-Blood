@@ -37,6 +37,7 @@ function AuthApi({ children }) {
 
           updateProfile(auth.currentUser, {
             displayName: filteredData[0].name,
+            photoURL: filteredData[0].image,
           });
         });
 

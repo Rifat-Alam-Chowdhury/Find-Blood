@@ -111,10 +111,11 @@ function ContentManagement() {
 
   return (
     <>
-      <div className="p-6 border-2 w-11/12">
+      <div className="font-extrabold">
         <div className="flex justify-end mb-4">
           <button
-            className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${
+            disabled={Loading}
+            className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-red-600 ${
               Loading ? "animate-pulse" : ""
             }`}
             onClick={handleBlogSubmit}
@@ -194,15 +195,17 @@ function ContentManagement() {
             value={content}
             config={config}
             tabIndex={1}
-            onBlur={() => {
-              const plainContent = editor.current?.editor.getEditorValue();
-              setContent(plainContent);
-            }}
+            onChange={(newContent) => setContent(newContent)}
           />
         </div>
 
         {/* // publised blogs */}
-        <Blogcard AllBlogs={AllBlogs} data={data} refetch={Allblogrefetch} />
+        <Blogcard
+          role={data?.role}
+          AllBlogs={AllBlogs}
+          data={data}
+          refetch={Allblogrefetch}
+        />
       </div>
     </>
   );

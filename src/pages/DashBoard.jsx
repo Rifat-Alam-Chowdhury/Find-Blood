@@ -11,7 +11,7 @@ function DashBoard() {
     <div>
       <div className="flex h-screen rounded-xl">
         <Sidebar />
-        <div className="flex-1 bg-gray-100 p-6 overflow-y-auto">
+        <div className="flex-1  p-6 overflow-y-auto">
           <Outlet />
         </div>
       </div>

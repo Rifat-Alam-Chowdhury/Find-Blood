@@ -88,7 +88,7 @@ function Sidebar() {
                   ? "text-white bg-red-300   p-2 rounded-xl   "
                   : "bg-transparent "
               }
-              to={"dashboard/content-management"}
+              to={"content-management"}
             >
               Mange Content
             </NavLink>

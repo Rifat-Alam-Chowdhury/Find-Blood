@@ -84,10 +84,13 @@ function DashBoardPage() {
         </>
       ) : (
         <div className="w-full p-7 ">
-          <div className="font-extrabold lg:flex justify-around">
+          <div className="font-extrabold lg:flex justify-around mb-5">
             <h1>Welcome {data?.name}</h1>
             <h1>{data?.role}</h1>
-            <h1>Your Last Posted three requests are</h1>
+
+            {data?.role !== "admin" && (
+              <h1>Your Last Posted three requests are</h1>
+            )}
           </div>
 
           {data?.role !== "admin" ? (
@@ -162,10 +165,13 @@ function DashBoardPage() {
                   </tfoot>
                 </table>
               ) : (
-                <p>
+                <p className=" text-center font-extrabold text-4xl">
                   You have not created any blood requested post. <br /> To
                   create one,{" "}
-                  <Link to={"create-donation-request"}>click here</Link>.
+                  <Link className="text-red-400" to={"create-donation-request"}>
+                    click here
+                  </Link>
+                  .
                 </p>
               )}
             </div>
