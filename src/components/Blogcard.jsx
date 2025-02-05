@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { button } from "@material-tailwind/react";
 
 function Blogcard({ AllBlogs = [], data = [], refetch, role }) {
   const axiosPublic = useAxiosPublic();
 
   const HandleblogPostStatus = async (status, post) => {
-    console.log(status, post);
+    //(status, post);
 
     const res = await axiosPublic.post(`BlogStatusChange`, {
       status: status,
@@ -15,7 +16,7 @@ function Blogcard({ AllBlogs = [], data = [], refetch, role }) {
     if (res?.data?.acknowledged === true) {
       refetch();
     }
-    return console.log(res.data.acknowledged);
+    return; //(res.data.acknowledged);
   };
 
   return (
@@ -58,15 +59,22 @@ function Blogcard({ AllBlogs = [], data = [], refetch, role }) {
                 )
               ) : (
                 <>
-                  <button
-                    disabled={role !== "admin"}
-                    onClick={() => {
-                      HandleblogPostStatus("Draft", blog?._id);
-                    }}
-                    className="btn-xs border-2 bg-green-300 rounded-xl"
-                  >
-                    Un Published
-                  </button>
+                  {role === "Volunteer" ? (
+                    <button className="bg-red-400 p-1 rounded-md">
+                      {" "}
+                      You can't edit Admin's post
+                    </button>
+                  ) : (
+                    <button
+                      disabled={role !== "admin"}
+                      onClick={() => {
+                        HandleblogPostStatus("Draft", blog?._id);
+                      }}
+                      className="btn-xs border-2 bg-green-300 rounded-xl"
+                    >
+                      Un Published
+                    </button>
+                  )}
                 </>
               )}
             </div>

@@ -6,23 +6,24 @@ import axios from "axios";
 import LoaderSpinner from "../components/LoaderSpinner";
 import uselocationapi from "../Hooks/uselocationapi";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function DonationCreate() {
   const { user } = useContext(AUthfirebase);
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const { data = [], isLoading } = useQuery({
     queryKey: "dashboarduser",
     queryFn: async () => {
-      const res = await axios.post(
-        `http://localhost:3000/Dashboard/${user?.email}`
-      );
+      const res = await axiosPublic.post(`Dashboard/${user?.email}`);
       return res.data;
     },
     enabled: !!user?.email,
   });
 
-  console.log(data);
+  //(data);
 
   const isloading = true;
   const [, distric, Division] = uselocationapi();
@@ -57,18 +58,30 @@ function DonationCreate() {
   };
 
   const api = async () => {
-    const res = await axios.post("http://localhost:3000/Dashboard/blood/Req", {
+    const res = await axiosPublic.post("Dashboard/blood/Req", {
       Info: formData,
     });
 
-    console.log(res.status);
+    //(res.status);
     if (res.status === 200) {
-      alert("Post Created");
+      toast.success("Post Created");
+      navigate("/DashBoard/my-donation-requests");
     }
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {data?.status === "active" ? (
         <div className="w-full ">
           <form onSubmit={handleFormSubmit}>

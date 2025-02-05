@@ -30,10 +30,7 @@ function ModalForm({ open, setopen, ModalInfo, refetch, role }) {
     const recipientDistrict = form.district.value;
     const recipientUpazila = form.upazila.value;
     const requestMessage = form["reqmessage"].value;
-    const requestedPerson = Array.from(
-      form.requestedperson.selectedOptions,
-      (option) => option.value
-    );
+
     const postedBy = form.psotedby.value;
     const id = form.id.value;
 
@@ -48,25 +45,23 @@ function ModalForm({ open, setopen, ModalInfo, refetch, role }) {
       recipientDistrict,
       recipientUpazila,
       requestMessage,
-      requestedPerson,
       postedBy,
       id,
     };
 
     const res = await Axiospublic.put("adminEditdonetionpost", formData);
-    console.log(res.data);
+    //(res.data);
 
     if (res?.data?.acknowledged === true) {
       setopen(false);
       refetch();
     }
 
-    console.log("Form Data:", formData);
+    //("Form Data:", formData);
   };
   return (
     <>
       <Dialog className="" open={open}>
-        <DialogHeader>Its a simple modal.</DialogHeader>
         <div className="w-11/12 mx-auto h-96 overflow-y-auto p-4 border rounded-lg">
           <form onSubmit={HandleEdit} className="space-y-4">
             <div>

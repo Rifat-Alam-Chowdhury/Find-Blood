@@ -3,18 +3,20 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import ModalForm from "../components/ModalForm";
 import { AUthfirebase } from "../Auth/AuthApi";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 function AdminAllBloodDonation() {
   const axiospublic = useAxiosPublic();
   const { user } = useContext(AUthfirebase);
   const [open, setopen] = useState(false);
   const [ModalInfo, setModalInfo] = useState(null);
+  const [statusFilter, setStatusFilter] = useState("All"); // New state for filtering
+
   const SetOpenModal = (e) => {
     setopen(true);
     setModalInfo(e);
-    console.log(e);
+    //(e);
   };
-  // console.log(ModalInfo);
 
   const {
     data = [],
@@ -28,8 +30,6 @@ function AdminAllBloodDonation() {
     },
   });
 
-  console.log(data.role);
-
   const HandleStatusChange = async (status, _id) => {
     const res = await axiospublic.post(`Status-Change-On-Blood-Req`, {
       status: status,
@@ -41,101 +41,132 @@ function AdminAllBloodDonation() {
     }
   };
 
+  // Filter data based on the selected status
+  const filteredData =
+    statusFilter === "All"
+      ? data?.allBloodRe
+      : data?.allBloodRe?.filter(
+          (item) => item.donationStatus === statusFilter
+        );
+  //(filteredData);
+
   return (
     <>
-      <div className="flex justify-start mb-2 border-t-red-900 font-extrabold">
-        <h1>All blood requests from those in urgent need of donations.</h1>
+      <div className="flex justify-between items-center p-2 mb-4">
+        {" "}
+        <div className=" border-t-red-900 font-extrabold">
+          <h1>All blood requests from those in urgent need of donations.</h1>
+        </div>
+        <div className="">
+          <select
+            className="select select-primary select-md"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Inprogress">Inprogress</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancel">Canceled</option>
+          </select>
+        </div>
       </div>
-      <div className="overflow-x-hidden h-screen rounded-xl">
+
+      <div className="p-2 min-h-screen rounded-xl ">
         <table className="table">
-          {/* head */}
-          <thead className="bg-red-300">
+          <thead className="bg-white">
             <tr>
               <th>#</th>
-              <th>recipient name</th>
-              <th>recipient district</th>
-              <th>recipient upazila</th>
-              <th>donation date</th>
-              <th>donation time</th>
-              <th>blood group</th>
-
-              <th>donation status</th>
+              <th>Recipient Name</th>
+              <th>Recipient District</th>
+              <th>Recipient Upazila</th>
+              <th>Donation Date</th>
+              <th>Donation Time</th>
+              <th>Blood Group</th>
+              <th>Donation Status</th>
               <th>Posted By</th>
             </tr>
           </thead>
           <tbody className="bg-cyan-100">
-            {/* row 1 */}
-
-            {data?.allBloodRe?.length === 0
-              ? "You have not made any requests"
-              : data?.allBloodRe?.map((datas, index) => {
-                  return (
-                    <tr className="" key={index}>
-                      <th>{index + 1}</th>
-                      <td>{datas.recipientName}</td>
-                      <td>{datas.recipientDistrict}</td>
-                      <td>{datas.recipientUpazila}</td>
-                      <td>{datas.donationDate}</td>
-                      <td>{datas.donationTime}</td>
-
-                      <td className="flex justify-center gap-6 ">
-                        {datas.bloodGroup}
-
-                        <button
-                          disabled={data?.role === "Volunteer"}
-                          onClick={(e) => {
-                            SetOpenModal(datas);
-                          }}
-                          className="btn btn-xs btn-accent"
-                        >
-                          edit
-                        </button>
-                      </td>
-
-                      <td>
-                        {datas.donationStatus !== "Completed" ? (
-                          <select
-                            className="select select-xs select-primary"
-                            value={datas.donationStatus}
-                            onChange={(e) =>
-                              HandleStatusChange(e.target.value, datas._id)
-                            }
-                          >
-                            <option
-                              value="Inprogress"
-                              disabled={datas.donationStatus === "Inprogress"}
-                            >
-                              Inprogress
-                            </option>
-                            <option
-                              value="Done"
-                              disabled={datas.donationStatus === "Done"}
-                            >
-                              Done
-                            </option>
-                            <option
-                              value="Canceled"
-                              disabled={datas.donationStatus === "Canceled"}
-                            >
-                              Canceled
-                            </option>
-                          </select>
-                        ) : (
-                          "Completed"
-                        )}
-                      </td>
-
-                      {datas.postedby === user.email ? (
-                        <td> You</td>
-                      ) : (
-                        <td>{datas.postedby}</td>
-                      )}
-                    </tr>
-                  );
-                })}
+            {filteredData?.length === 0 ? (
+              <tr>
+                <td colSpan="9" className="text-center">
+                  No requests found for the selected status.
+                </td>
+              </tr>
+            ) : (
+              filteredData?.map((datas, index) => (
+                <tr className="" key={index}>
+                  <th>{index + 1}</th>
+                  <td>{datas.recipientName}</td>
+                  <td>{datas.recipienTdistrict}</td>
+                  <td>{datas.recipientUpazila}</td>
+                  <td>{datas.donationDate}</td>
+                  <td>{datas.donationTime}</td>
+                  <td className="flex justify-center gap-6 ">
+                    {datas.bloodGroup}
+                    <button
+                      disabled={data?.role === "volunteer"}
+                      onClick={() => SetOpenModal(datas)}
+                      className="btn btn-xs btn-accent"
+                    >
+                      Edit
+                    </button>
+                  </td>
+                  {/* actions */}
+                  <td>
+                    <select
+                      className="select select-xs select-primary"
+                      value={datas.donationStatus}
+                      onChange={(e) =>
+                        HandleStatusChange(e.target.value, datas._id)
+                      }
+                    >
+                      <option value={datas.donationStatus} disabled selected>
+                        {datas.donationStatus}
+                      </option>
+                      <option
+                        value="Pending"
+                        disabled={datas.donationStatus === "Pending"}
+                      >
+                        Pending
+                      </option>
+                      <option
+                        value="Inprogress"
+                        disabled={datas.donationStatus === "Inprogress"}
+                      >
+                        Inprogress
+                      </option>
+                      <option
+                        value="Done"
+                        disabled={datas.donationStatus === "Done"}
+                      >
+                        Done
+                      </option>
+                      <option
+                        value="Canceled"
+                        disabled={datas.donationStatus === "Canceled"}
+                      >
+                        Canceled
+                      </option>
+                      <option
+                        value="Completed"
+                        disabled={datas.donationStatus === "Completed"}
+                      >
+                        Complete
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    {datas.postedby === user.email ? "You" : datas.postedby}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
+
       <ModalForm
         open={open}
         setopen={setopen}

@@ -4,16 +4,18 @@ import React from "react";
 import { FaRegUser } from "react-icons/fa6";
 import { MdBloodtype, MdOutlineCurrencyExchange } from "react-icons/md";
 import { Link } from "react-router-dom";
+import useAxios from "../Hooks/useAxios";
 
 function Dashboardcard() {
+  const axiosinterceptor = useAxios();
   const { data } = useQuery({
     queryKey: ["dashboardinfo"],
     queryFn: async () => {
-      const res = await axios.post(`http://localhost:3000/Dashboard/profile`);
+      const res = await axiosinterceptor.post(`Dashboard/profile`);
       return res.data;
     },
   });
-  console.log(data);
+  //(data);
 
   return (
     <>
@@ -29,7 +31,10 @@ function Dashboardcard() {
                 <p>{data?.totoalUser}</p>{" "}
               </div>
             </div>
-            <Link className="text-center btn" to={"/DashBoard/AllUsers"}>
+            <Link
+              className="text-center btn hover:bg-cyan-300"
+              to={"/DashBoard/AllUsers"}
+            >
               All User
             </Link>
           </div>
@@ -43,10 +48,13 @@ function Dashboardcard() {
               </div>
               <div className="text-2xl font-extrabold text-center space-y-6">
                 <h2 className="card-title">Total Funding</h2>
-                <p>{data?.totoalUser}</p>
+                <p>$ {data?.TotalFunding}</p>
               </div>
             </div>
-            <Link className="text-center btn" to={"/DashBoard/TotalFunding"}>
+            <Link
+              className="text-center btn hover:bg-cyan-300"
+              to={"/DashBoard/TotalFunding"}
+            >
               Total Funding
             </Link>
           </div>
@@ -65,7 +73,7 @@ function Dashboardcard() {
               </div>
             </div>
             <Link
-              className="text-center btn"
+              className="text-center btn hover:bg-cyan-300"
               to={"/DashBoard/All-donation-requests"}
             >
               Total Blood Request

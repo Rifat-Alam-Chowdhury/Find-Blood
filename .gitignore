@@ -39,3 +39,8 @@ package.json
 *.njsproj
 *.sln
 *.sw?
+
+.firebase
+.firebaserc
+eslint.config.js
+firebase.json

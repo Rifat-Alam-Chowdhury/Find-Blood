@@ -12,6 +12,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
@@ -20,6 +21,17 @@ createRoot(document.getElementById("root")).render(
       <AuthApi>
         <RouterProvider router={router}>
           <App />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </RouterProvider>
       </AuthApi>
     </QueryClientProvider>

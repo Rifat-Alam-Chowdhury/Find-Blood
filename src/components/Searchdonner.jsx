@@ -12,7 +12,7 @@ function Searchdonner() {
     const district = e.target.district.value;
     const division = e.target.division.value;
     const date = e.target.date.value;
-    console.log(name, district, division, date);
+    //(name, district, division, date);
 
     navigate("Search-donner", {
       state: { name, district, date, division },

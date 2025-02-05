@@ -2,7 +2,7 @@ import React from "react";
 
 function InfoTable({ data }) {
   const { status, role, name, image, email, district, bloodGroup } = data || {};
-  console.log(image);
+  //(image);
 
   return (
     <div className="overflow-x-auto">

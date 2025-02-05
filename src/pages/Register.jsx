@@ -1,10 +1,12 @@
 import { Input, Typography, Button } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import uselocationapi from "../Hooks/uselocationapi";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { AUthfirebase } from "../Auth/AuthApi";
 import { MdBloodtype } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
   const [group, districtList, Division] = uselocationapi();
@@ -22,12 +24,13 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [status] = useState("active");
   const [role] = useState("Donor");
+  const Navigate = useNavigate();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-
+    // return
     if (password !== confirmPassword) {
-      return alert("Passwords do not match!");
+      return toast.warning("Passwords do not match!");
     }
 
     try {
@@ -44,7 +47,7 @@ function Register() {
 
       const userData = {
         name,
-        email,
+        email: email.toLowerCase(),
         district,
         division,
         bloodGroup,
@@ -55,20 +58,33 @@ function Register() {
       };
 
       const res = await axios.post(
-        `http://localhost:3000/userRegistration`,
+        `https://server-jade-kappa-83.vercel.app/userRegistration`,
         userData
       );
-      console.log(res.data);
+      toast.success("SignUp SuccessFully");
+      Navigate("/");
+
       setLoading(false);
     } catch (error) {
       console.error(error.message);
       setLoading(false);
-      alert("An error occurred during registration.");
+      toast.error("An error occurred during registration.");
     }
   };
 
   return (
     <section className="grid text-center items-center p-8 border-2">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div>
         <Typography variant="h3" color="blue-gray" className="mb-2">
           Sign up

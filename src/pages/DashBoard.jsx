@@ -8,14 +8,10 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 function DashBoard() {
   return (
-    <div>
-      <div className="flex h-screen rounded-xl">
-        <Sidebar />
-        <div className="flex-1  p-6 overflow-y-auto">
-          <Outlet />
-        </div>
-      </div>
-    </div>
+    <>
+      {" "}
+      <Sidebar />
+    </>
   );
 }
 

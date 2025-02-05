@@ -19,7 +19,7 @@ function CheackVolunteer({ children }) {
     },
     enabled: !!user?.email,
   });
-  //   console.log(data?.data?.message);
+  //   //(data?.data?.message);
   if (isLoading) {
     return <LoaderSpinner />;
   }

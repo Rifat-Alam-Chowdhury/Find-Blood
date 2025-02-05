@@ -19,7 +19,9 @@ function SearchDonnerPage() {
     division: "",
     district: "",
     date: "",
+    role: "Donor",
   });
+  //(filters);
 
   const {
     data: Alldonner = [],
@@ -34,7 +36,7 @@ function SearchDonnerPage() {
       return response.data;
     },
   });
-  console.log(Alldonner);
+  //(Alldonner);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,6 +45,7 @@ function SearchDonnerPage() {
       bloodGroup: formData.get("group") || "",
       recipientUpazila: formData.get("Divisions") || "",
       recipientDistrict: formData.get("district") || "",
+      role: formData.get("Donor") || "Donor",
     };
     setFilters(updatedFilters);
   };
@@ -50,7 +53,7 @@ function SearchDonnerPage() {
   const handleRequest = async (e) => {
     const req = AxiosPublic.post("request", { email: user?.email, post: e });
     refetch();
-    console.log(user?.email, "has requested on this", e);
+    //(user?.email, "has requested on this", e);
   };
 
   return (
@@ -125,6 +128,13 @@ function SearchDonnerPage() {
                   ))}
                 </tbody>
               </table>
+              {Alldonner.length === 0 && (
+                <>
+                  <h1 className="text-center">
+                    No Donor Found From Your Search Try Another Search Option
+                  </h1>
+                </>
+              )}
             </div>
           )}
         </div>

@@ -52,7 +52,7 @@ function Navbar() {
               to={"Funding"}
               className={({ isActive }) => (isActive ? "text-red-700" : "")}
             >
-              Findings
+              Help Us
             </NavLink>
           </li>
           <li>
@@ -155,7 +155,7 @@ function Navbar() {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full ">
-              <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+              <img src={user?.photoURL} />
             </div>
           </div>
           <ul

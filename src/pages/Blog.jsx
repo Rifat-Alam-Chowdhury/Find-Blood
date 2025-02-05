@@ -15,7 +15,7 @@ function Blog() {
     },
   });
 
-  console.log(AllBlogs);
+  //(AllBlogs);
 
   return (
     <>

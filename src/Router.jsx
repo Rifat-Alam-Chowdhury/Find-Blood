@@ -25,6 +25,10 @@ import Privatefirebase from "./Protected/Privatefirebase";
 import Blog from "./pages/Blog";
 import BloodReqEditPage from "./components/BloodReqEditPage";
 import Funding from "./pages/Funding";
+import Payment from "./pages/Payment";
+
+import TotalFunds from "./pages/TotalFunds";
+import MyAppiledPosts from "./pages/MyAppiledPosts";
 
 const router = createBrowserRouter([
   {
@@ -67,7 +71,7 @@ const router = createBrowserRouter([
         path: "Funding",
         element: (
           <Privatefirebase>
-            <Funding />
+            <Payment />
           </Privatefirebase>
         ),
       },
@@ -98,6 +102,10 @@ const router = createBrowserRouter([
         element: <MyDonations />,
       },
       {
+        path: "my-appiled-posts",
+        element: <MyAppiledPosts />,
+      },
+      {
         path: "All-donation-requests",
         element: (
           <CheackAdmin>
@@ -107,7 +115,11 @@ const router = createBrowserRouter([
       },
       {
         path: "AllUsers",
-        element: <AllUsers />,
+        element: (
+          <CheackAdmin>
+            <AllUsers />
+          </CheackAdmin>
+        ),
       },
       {
         path: "content-management",
@@ -120,6 +132,10 @@ const router = createBrowserRouter([
       {
         path: "editBloodreq/:id",
         element: <BloodReqEditPage />,
+      },
+      {
+        path: "TotalFunding",
+        element: <TotalFunds />,
       },
     ],
   },

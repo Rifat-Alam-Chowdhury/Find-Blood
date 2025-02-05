@@ -19,7 +19,7 @@ function CheackAdmin({ children }) {
     },
     enabled: !!user?.email,
   });
-  //   console.log(data?.data?.message);
+  //   //(data?.data?.message);
   if (isLoading) {
     return (
       <div className="w-full flex justify-center my-auto">
@@ -30,7 +30,7 @@ function CheackAdmin({ children }) {
   if (data?.data?.message === "admin access") {
     return children;
   }
-  if (data?.data?.message === "Volunteer access") {
+  if (data?.data?.message === "volunteer access") {
     return children;
   } else {
     return (

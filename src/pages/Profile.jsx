@@ -52,7 +52,7 @@ function Profile() {
 
     //api call dite hobe patch
     const response = await axios.patch(
-      "http://localhost:3000/Dashboard/profile/UserUpdate",
+      "https://server-jade-kappa-83.vercel.app/Dashboard/profile/UserUpdate",
       {
         info: patch,
       }
@@ -83,22 +83,24 @@ function Profile() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setEdit(false)}
-                    className="text-sm/6 font-semibold text-gray-900"
-                  >
-                    Cancel
-                  </button>
-
                   {Edit ? (
-                    <button
-                      type="submit"
-                      onClick={() => setEdit(false)}
-                      className="rounded-md  bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-                    >
-                      Save
-                    </button>
+                    <>
+                      {" "}
+                      <button
+                        type="submit"
+                        onClick={() => setEdit(false)}
+                        className="rounded-md  bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                      >
+                        Save
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setEdit(false)}
+                        className="text-sm/6 font-semibold text-gray-900"
+                      >
+                        Cancel
+                      </button>
+                    </>
                   ) : (
                     <button
                       onClick={() => setEdit(true)}

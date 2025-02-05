@@ -12,7 +12,7 @@ function useAxios() {
   axiosInterface.interceptors.request.use(
     (response) => {
       const token = localStorage.getItem("access-token");
-      console.log("intersept by interceptor axios", token);
+      //("intersept by interceptor axios", token);
       response.headers.authorization = `Bearer ${token}`;
 
       return response;

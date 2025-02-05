@@ -11,6 +11,16 @@ import { auth } from "./FirebaseAuth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 export const AUthfirebase = createContext();
 function AuthApi({ children }) {
+  const now = new Date();
+  const day = now.getDate();
+  const year = now.getFullYear();
+  const hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  const seconds = now.getSeconds().toString().padStart(2, "0");
+  const period = hours >= 12 ? "pm" : "am";
+  const formattedHours = hours % 12 || 12;
+
+  const customTime = `${day} ${year} ${formattedHours}:${minutes}.${seconds} ${period}`;
   const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [isloading, setisloading] = useState(true);
@@ -31,12 +41,9 @@ function AuthApi({ children }) {
         setisloading(false);
 
         axiosPublic("/").then((res) => {
-          console.log(res.data);
-
           const filteredData = res?.data?.filter(
             (item) => item.email == currentUser.email
           );
-          console.log(filteredData);
 
           updateProfile(auth.currentUser, {
             displayName: filteredData[0]?.name,
@@ -49,11 +56,15 @@ function AuthApi({ children }) {
             setisloading(false);
           }
         });
+        axiosPublic.post("/logIntime", {
+          email: currentUser?.email,
+          time: customTime,
+        });
 
-        console.log("user =>", currentUser);
+        //("user =>", currentUser);
       }
       // localStorage.removeItem("access-token");
-      console.log("user =>", currentUser);
+
       // setUser(null);
       setisloading(false);
     });

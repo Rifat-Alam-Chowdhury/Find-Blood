@@ -41,7 +41,7 @@ function ContentManagement() {
 
     enabled: !!user?.email,
   });
-  console.log(data);
+  //(data);
 
   //all blogs
   const {
@@ -55,7 +55,7 @@ function ContentManagement() {
       return allblogs.data;
     },
   });
-  console.log(AllBlogs);
+  //(AllBlogs);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -93,7 +93,7 @@ function ContentManagement() {
       };
 
       const upload = await axiosapi.post("createblog", info);
-      console.log(upload.data);
+      //(upload.data);
       setLoading(false);
       Allblogrefetch();
       setTitle("");

@@ -28,7 +28,7 @@ function AllUsers() {
     if (block.status === 200) {
       refetch();
     }
-    console.log(block.status);
+    //(block.status);
   };
   const HandleUnBlock = async (e) => {
     const Unblock = await AxiosPublic.post(`Unblockuser`, { id: e });
@@ -45,19 +45,18 @@ function AllUsers() {
       refetch();
     }
   };
-  console.log(data); //status
+  //(data); //status
 
   const filteredData =
     filterStatus === "all"
       ? data
       : data.filter((data) => data.status === filterStatus);
 
+  //(filteredData);
+
   return (
     <>
-      <div className="flex justify-between mb-2 border-t-red-900">
-        <div className="font-extrabold">
-          <h1>All blood requests from those in urgent need of donations.</h1>
-        </div>
+      <div className="flex justify-between mb-2 p-2 border-t-red-900">
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
@@ -68,9 +67,9 @@ function AllUsers() {
           <option value="Block">Blocked</option>
         </select>
       </div>
-      <div className="overflow-x-hidden h-screen rounded-xl">
-        <table className="table font-extrabold ">
-          <thead className="text-center bg-red-300">
+      <div className="p-2  rounded-xl">
+        <table className="table   font-extrabold ">
+          <thead className="text-center bg-white">
             <tr>
               <th>avatar</th>
               <th>name</th>
@@ -79,6 +78,7 @@ function AllUsers() {
               <th>Change</th>
               <th>Status</th>
               <th>action</th>
+              <th>Last login</th>
             </tr>
           </thead>
           <tbody className="text-center bg-cyan-100">
@@ -97,26 +97,30 @@ function AllUsers() {
                 <td>{donner.role}</td>
 
                 <td>
-                  <select
-                    disabled={donner.role === "admin"}
-                    onChange={(e) => {
-                      HandleChangeRole(e.target.value, donner._id);
-                    }}
-                    className="p-1 rounded-lg text-center"
-                  >
-                    <option value="" disabled selected>
-                      {donner.role}
-                    </option>
-                    <option disabled={donner.role === "admin"} value="admin">
-                      Admin
-                    </option>
-                    <option
-                      disabled={donner.role === "Volunteer"}
-                      value="volunteer"
+                  {donner.role === "admin" ? (
+                    <select
+                      disabled={donner.role === "admin"}
+                      onChange={(e) => {
+                        HandleChangeRole(e.target.value, donner._id);
+                      }}
+                      className="p-1 rounded-lg text-center"
                     >
-                      Volunteer
-                    </option>
-                  </select>
+                      <option value="" disabled selected>
+                        {donner.role}
+                      </option>
+                      <option disabled={donner.role === "admin"} value="admin">
+                        Admin
+                      </option>
+                      <option
+                        disabled={donner.role === "Volunteer"}
+                        value="volunteer"
+                      >
+                        Volunteer
+                      </option>
+                    </select>
+                  ) : (
+                    "Only admin can change role"
+                  )}
                 </td>
                 <td>{donner.status}</td>
 
@@ -126,6 +130,7 @@ function AllUsers() {
                   <th>
                     {donner.status === "active" ? (
                       <button
+                        disabled={donner.role !== "admin"}
                         onClick={() => {
                           HandleBlock(donner._id);
                         }}
@@ -135,6 +140,7 @@ function AllUsers() {
                       </button>
                     ) : (
                       <button
+                        disabled={donner.role !== "admin"}
                         onClick={() => {
                           HandleUnBlock(donner._id);
                         }}
@@ -145,9 +151,22 @@ function AllUsers() {
                     )}
                   </th>
                 )}
+                <td>{donner.Lastlogin}</td>
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan="7  " className="text-center ">
+                <button
+                  onClick={() => refetch()}
+                  className="btn-xs bg-cyan-300 rounded-xl"
+                >
+                  Refresh
+                </button>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </>

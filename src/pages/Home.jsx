@@ -7,6 +7,7 @@ import WeareNowAt from "../components/WeareNowAt";
 import AboutUs from "../components/AboutUs";
 
 import { AUthfirebase } from "../Auth/AuthApi";
+import { ToastContainer } from "react-toastify";
 
 function Home() {
   const { user } = useContext(AUthfirebase);
@@ -73,6 +74,17 @@ function Home() {
           </div>
         </div>
       </motion.div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="lg:flex  justify-center gap-6 p-6">
         <div className=" mx-auto mb-6 text-center">
           <h1 className="font-extrabold text-2xl">What is Blood?</h1>

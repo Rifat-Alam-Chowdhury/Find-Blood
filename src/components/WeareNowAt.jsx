@@ -5,10 +5,10 @@ import { MdBloodtype } from "react-icons/md";
 function WeareNowAt() {
   return (
     <>
-      <div className="text-center text-2xl lg:text-4xl mt-6">
+      <div className="text-center text-2xl  lg:text-4xl mt-6">
         <h1>We're a network of</h1>
       </div>
-      <div className="flex justify-between gap-5 w-9/12 mx-auto mt-6 items-center ">
+      <div className="lg:flex  justify-between gap-5 w-9/12 mx-auto mt-6 items-center ">
         <div className=" text-center p-2  flex items-center gap-5 font-extrabold ">
           <span>
             <IoPeopleOutline size={60} color="red" />

@@ -5,6 +5,9 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AUthfirebase } from "../Auth/AuthApi";
+import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 function Login() {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -14,23 +17,39 @@ function Login() {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  console.log("state in the location login page", location.state);
-
+  //("state in the location login page", location.state);
+  const axiospublic = useAxiosPublic();
   const HandleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const Password = e.target.Password.value;
     await LogIn(email, Password)
-      .then(() => {
+      .then(async (e) => {
+        // const logintime = await axiospublic.post("logIntime", {
+        //   time: new Date().toLocaleString(),
+        // });
+        //("Login successful");
+        toast.success("Log In Successfully");
         navigate(from, { replace: true });
       })
       .catch((e) => {
-        alert(e);
+        toast.error("Invalid Credential");
       });
   };
   return (
     <>
       <section className="grid text-center h-screen items-center p-8 border-2">
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div>
           <Typography variant="h3" color="blue-gray" className="mb-2">
             Log In
