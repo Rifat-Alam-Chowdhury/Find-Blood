@@ -8,10 +8,11 @@ function App() {
   return (
     <>
       {/* nav */}
-      <div className="bg-pink-400">
+      <div className>
         <Navbar />
       </div>
       {/* nav */}
+
       <div className="min-h-[calc(100vh-288px)]">
         <ToastContainer
           position="top-center"
