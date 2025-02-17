@@ -16,6 +16,15 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  //for reqriuiter
+
+  const [email, setemail] = useState("");
+  const [Pass, setPass] = useState("");
+  const filllog = () => {
+    setemail("Rifatalamtabs2@gmail.com");
+    setPass("Rifat*1010*1#");
+  };
+
   const from = location.state?.from?.pathname || "/";
   //("state in the location login page", location.state);
   const axiospublic = useAxiosPublic();
@@ -38,7 +47,10 @@ function Login() {
   };
   return (
     <>
-      <section className="grid text-center h-screen items-center p-8 border-2">
+      <button className="btn btn-primary" onClick={filllog}>
+        log
+      </button>
+      <section className="grid text-center h-screen items-center p-8 border-2 border-green-700">
         <ToastContainer
           position="top-center"
           autoClose={5000}
@@ -76,6 +88,7 @@ function Login() {
                 size="lg"
                 type="email"
                 name="email"
+                value={email}
                 placeholder="name@mail.com"
                 className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
                 labelProps={{
@@ -96,6 +109,7 @@ function Login() {
                 size="lg"
                 name="Password"
                 placeholder="********"
+                value={Pass}
                 labelProps={{
                   className: "hidden",
                 }}

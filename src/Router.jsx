@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
-import Donner from "./pages/BloodDonationrequests";
 
 import SearchDonnerPage from "./pages/SearchDonnerPage";
 import Login from "./pages/Login";
@@ -19,7 +18,6 @@ import AdminAllBloodDonation from "./pages/AdminAllBloodDonation";
 import CheackAdmin from "./Protected/CheackAdmin";
 import ContentManageMent from "./pages/ContentManageMent";
 import CheackVolunteer from "./Protected/CheackVolunteer";
-import BloodDonationrequests from "./pages/BloodDonationrequests";
 import BloodreqDetailsPage from "./pages/BloodreqDetailsPage";
 import Privatefirebase from "./Protected/Privatefirebase";
 import Blog from "./pages/Blog";
@@ -29,6 +27,7 @@ import Payment from "./pages/Payment";
 
 import TotalFunds from "./pages/TotalFunds";
 import MyAppiledPosts from "./pages/MyAppiledPosts";
+import FindDonner from "./pages/FindDonner";
 
 const router = createBrowserRouter([
   {
@@ -40,8 +39,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/BloodDonationrequests",
-        element: <BloodDonationrequests />,
+        path: "/FindDonner",
+        element: <FindDonner />,
       },
       {
         path: "/login",

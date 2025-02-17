@@ -20,7 +20,9 @@ function Navbar() {
       <li>
         <NavLink
           to="/"
-          className={({ isActive }) => (isActive ? "text-red-700" : "")}
+          className={({ isActive }) =>
+            isActive ? "text-red-700 transform  scale-110 font-extrabold" : ""
+          }
         >
           Home
         </NavLink>
@@ -28,17 +30,21 @@ function Navbar() {
 
       <li>
         <NavLink
-          to="/BloodDonationrequests"
-          className={({ isActive }) => (isActive ? "text-red-700" : "")}
+          to="/FindDonner"
+          className={({ isActive }) =>
+            isActive ? "text-red-700 transform  scale-110 font-extrabold" : ""
+          }
         >
-          Blood Donation requests
+          Find Donner
         </NavLink>
       </li>
 
       <li>
         <NavLink
           to="/Blogs"
-          className={({ isActive }) => (isActive ? "text-red-700" : "")}
+          className={({ isActive }) =>
+            isActive ? "text-red-700 transform  scale-110 font-extrabold" : ""
+          }
         >
           Blog
         </NavLink>
@@ -46,29 +52,52 @@ function Navbar() {
 
       {user ? (
         <>
-          {" "}
           <li>
             <NavLink
               to={"Funding"}
-              className={({ isActive }) => (isActive ? "text-red-700" : "")}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-red-700 transform  scale-110 font-extrabold"
+                  : ""
+              }
             >
               Help Us
             </NavLink>
           </li>
           <li>
             <NavLink
+              to={"/DashBoard/profile"}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-red-700 transform  scale-110 font-extrabold"
+                  : ""
+              }
+            >
+              Profile
+            </NavLink>
+          </li>
+          <li>
+            <Link
               onClick={SignOutUser}
-              className={({ isActive }) => (isActive ? "text-red-700" : "")}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-red-700 transform  scale-110 font-extrabold"
+                  : ""
+              }
             >
               Log Out
-            </NavLink>
+            </Link>
           </li>
         </>
       ) : (
         <li>
           <NavLink
             to="/login"
-            className={({ isActive }) => (isActive ? "text-red-700" : "")}
+            className={({ isActive }) =>
+              isActive
+                ? "text-red-700 transform  scale-110 font-extrabold "
+                : ""
+            }
           >
             Log In
           </NavLink>
@@ -77,10 +106,12 @@ function Navbar() {
     </>
   );
   return (
-    <div className="navbar justify-between bg-[#6a0b37] text-white">
-      {/* todo:mobile */}
+    <div className="navbar lg:justify-around justify-stretch w-11/12 items-center mx-auto  ">
+      {/* mobile */}
       <div className="drawer lg:hidden w-7 z-10">
+        {/* mobile er menu icon */}
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+        {/* mobile er menu icon */}
         <div className="drawer-content ">
           {/* Page content here */}
           <label htmlFor="my-drawer">
@@ -100,75 +131,39 @@ function Navbar() {
             </svg>
           </label>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side  w-full">
           <label
             htmlFor="my-drawer"
             aria-label="close sidebar"
             className="drawer-overlay "
           ></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+          <ul className="menu bg-base-200 text-base-content min-h-full w-55 p-4">
             {/* Sidebar content here */}
             {NavOptions}
+            <div className=" mx-auto mt-10">
+              <button className=" px-2 py-3 bg-red-500 text-white rounded-xl ">
+                Emergency
+              </button>
+            </div>
           </ul>
         </div>
       </div>
-
-      <div className=" ">
-        <Link to={"/"} className=" text-xl">
-          Blood
+      {/* mobile */}
+      <div className="   ">
+        <Link to={"/"} className=" text-xl font-extrabold">
+          BLOOD
         </Link>
       </div>
 
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:block ">
         <ul className="flex justify-between gap-5 px-1">{NavOptions}</ul>
       </div>
 
-      {/* //search */}
-      <div className="hidden lg:block   ">
-        <div>
-          <label className=" flex items-center ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <input
-              type="text"
-              className=" border-2 ml-2 p-1 rounded-lg "
-              placeholder="Search Blood Group"
-            />
-          </label>
-        </div>
+      <div className=" hidden lg:block">
+        <button className=" p-2 bg-red-500 text-black font-extrabold text-sm rounded-xl ">
+          Emergency
+        </button>
       </div>
-      {user && (
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full ">
-              <img src={user?.photoURL} />
-            </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content text-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <a className="">DashBoard</a>
-              <button onClick={SignOutUser}>Log Out</button>
-            </li>
-          </ul>
-        </div>
-      )}
     </div>
   );
 }
