@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Blood** is a user-friendly web application built using **React** and styled with **Tailwind CSS**. It allows users to request and donate blood and provides an admin dashboard to manage donation requests. The app is fully responsive, ensuring seamless access across devices.
+The **Blood** is a user-friendly web application built using **React** and **styled with** **Tailwind CSS**. It allows users to request and donate blood and provides an admin dashboard to manage donation requests. The app is fully responsive, ensuring seamless access across devices.
 
 ## Technologies Used
 
