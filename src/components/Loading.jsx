@@ -18,7 +18,6 @@ function Loading() {
 
       {/* Loading Text */}
       <div className="flex items-center space-x-2  text-primary-200">
-        <span className="text-lg font-medium">Finding Donors</span>
         <div className="flex space-x-1">
           {[0, 1, 2].map((i) => (
             <div

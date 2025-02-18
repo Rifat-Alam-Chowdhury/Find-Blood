@@ -24,6 +24,14 @@ function Login() {
     setemail("Rifatalamtabs2@gmail.com");
     setPass("Rifat*1010*1#");
   };
+  const Donner = () => {
+    setemail("doner@gmail.com");
+    setPass("Rifat*1010*1#");
+  };
+  const Volenteer = () => {
+    setemail("rifatalamtabs12@gmail.com");
+    setPass("Rifat*1010*1#");
+  };
 
   const from = location.state?.from?.pathname || "/";
   //("state in the location login page", location.state);
@@ -48,7 +56,13 @@ function Login() {
   return (
     <>
       <button className="btn btn-primary" onClick={filllog}>
-        log
+        admin log
+      </button>
+      <button className="btn btn-primary" onClick={Donner}>
+        DONNER log
+      </button>
+      <button className="btn btn-primary" onClick={Volenteer}>
+        volunteer log
       </button>
       <section className="grid text-center h-screen items-center p-8 border-2 border-green-700">
         <ToastContainer
