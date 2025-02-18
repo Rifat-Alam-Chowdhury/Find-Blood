@@ -1,61 +1,123 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import { Form, useNavigate } from "react-router-dom";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
-import { AUthfirebase } from "../Auth/AuthApi";
+
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import Loading from "../components/Loading";
 
 function FindDonner() {
-  const navigate = useNavigate();
-  const { user } = useContext(AUthfirebase);
   const axiosPublic = useAxiosPublic();
+  const [searchFilters, setSearchFilters] = useState({});
+  console.log(searchFilters);
+
   const {
     data: Alldonners = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["ALL-Donners"],
+    queryKey: ["ALL-Donners", searchFilters],
     queryFn: async () => {
-      const res = await axiosPublic(`ALL_DONNERS`);
+      const res = await axiosPublic.get("ALL_DONNERS", {
+        params: searchFilters,
+      });
       return res.data;
     },
   });
   console.log(Alldonners);
 
-  <>
-    [
-    {/* {
-    _id: new ObjectId('67b36be936aaf4a5ff784c67'),
-    personalInfo: {
-      firstName: 'John',
-      lastName: 'Doe',
-      dateOfBirth: [Object],
-      gender: 'Male',
-      weight: 70,
-      photo: 'profile_picture.jpg'
-    },
-    contactInfo: {
-      email: 'john.doe@example.com',
-      phone: '+1-234-567-8901',
-      address: [Object]
-    },
-    medicalInfo: { bloodGroup: 'O+', lastDonationDate: [Object] },
-    consent: { agreed: true, timestamp: [Object] }
-  } */}
-    ]
-  </>;
+  const [formData, setFormData] = useState({
+    bloodGroup: "",
+    city: "",
+    donationDate: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const filters = Object.fromEntries(
+      Object.entries(formData).map(([k, v]) => [k, v || undefined])
+    );
+    setSearchFilters(filters);
+  };
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* search form */}
+        <div className="mb-10">
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-2 gap-4">
+              <div className="relative">
+                <label className="text-sm mb-1 block">Blood Group*</label>
+                <select
+                  name="bloodGroup"
+                  value={formData.bloodGroup}
+                  onChange={handleChange}
+                  className="w-full pl-4 pr-8 py-3 bg-white bg-opacity-5 rounded-lg border border-red-400 focus:border-primary-200 focus:ring-2 focus:ring-primary-200/20 outline-none transition-all"
+                >
+                  <option value="" disabled>
+                    Select Blood Type
+                  </option>
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                  <option>O+</option>
+                  <option>O-</option>
+                </select>
+              </div>
+
+              <div className="relative">
+                <label className="text-sm mb-1 block">City*</label>
+                <select
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="w-full pl-4 pr-8 py-3 bg-white bg-opacity-5 rounded-lg border border-red-400 focus:border-primary-200 focus:ring-2 focus:ring-primary-200/20 outline-none transition-all"
+                >
+                  <option disabled value="">
+                    Select City
+                  </option>
+                  <option value={"Chatagong"}>Chatagong</option>
+                  <option value={"Dhaka"}>Dhaka</option>
+                  <option value={"Mirpur"}>Mirpur</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="mx-auto bg-white text-primary-900 px-5 py-2 rounded-full font-semibold hover:bg-primary-100 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 mt-6 border-2 border-red-400 animate-spin"
+            >
+              <MagnifyingGlassIcon
+                className={`w-6 h-6 ${isLoading ? "animate-spin" : ""}`}
+              />
+              Search Donors
+            </button>
+          </form>
+        </div>
+        {/* search form  endss*/}
+        {isLoading && (
+          <div className="  flex justify-center items-center">
+            <Loading />
+          </div>
+        )}
+        {Alldonners?.length === 0 && (
+          <div className="text-3xl text-center  ">Currently no donor found</div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Alldonners.map((donor, index) => (
+          {Alldonners?.map((donor, index) => (
             <div
               key={index}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
-              {/* Profile  */}
-              <div className="p-6  bg-red-50 flex items-center space-x-4">
+              <div className="p-6  bg-primary-200 flex items-center space-x-4">
                 <img
                   src={donor?.personalInfo?.photo}
                   alt={`${donor?.personalInfo?.firstName}'s profile`}
@@ -76,7 +138,6 @@ function FindDonner() {
                 </div>
               </div>
 
-              {/* medical Infos */}
               <div className="p-6 border-b border-gray-100">
                 <div className="flex justify-between items-center">
                   <div>
@@ -93,7 +154,6 @@ function FindDonner() {
                 </div>
               </div>
 
-              {/* Contact and Location */}
               <div className="p-6">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -125,7 +185,7 @@ function FindDonner() {
                       <span>{donor?.contactInfo?.address?.country}</span>
                     </div>
                   </div>
-                  {/* last donation */}
+
                   <div className="flex items-center">
                     <svg
                       className="w-5 h-5 text-red-600 mr-3"
@@ -152,7 +212,6 @@ function FindDonner() {
                 </div>
               </div>
 
-              {/* requested*/}
               <div className="bg-gray-50 px-6 py-4">
                 <div className="flex justify-between items-center">
                   <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200">
