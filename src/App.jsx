@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       {/* nav */}
-      <div className>
+      <div className="bg-gradient-to-b from-primary-800 to-primary-900">
         <Navbar />
       </div>
       {/* nav */}

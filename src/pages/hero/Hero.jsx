@@ -3,7 +3,6 @@ import React from "react";
 function Hero() {
   return (
     <section className="relative bg-gradient-to-b from-primary-900 to-primary-800 h-screen flex lg:items-center justify-center ">
-      {/* Background */}
       <div className="absolute inset-0 opacity-10 ">
         <svg
           viewBox="0 0 100 100"
@@ -20,7 +19,6 @@ function Hero() {
 
       <div className=" mt-5 lg:mt-0 lg:w-9/12 mx-auto  lg:px-4 relative z-10 ">
         <div className="flex flex-col    lg:flex-row items-center justify-between">
-          {/* Left side er */}
           <div className="text-left  lg:w-1/2 mb-5 lg:p-0 w-11/12 mx-auto">
             <h1 className="text-2xl  md:text-6xl  font-bold text-white mb-6 leading-tight">
               Save Lives With Your
@@ -50,7 +48,6 @@ function Hero() {
             </button>
           </div>
 
-          {/* Right blood pic*/}
           <div className="lg:w-1/2  flex justify-center ">
             <div className="relative lg:w-64 lg:h-64 w-40 h-36 animate-pulse-slow">
               <div className="absolute inset-0 bg-primary-700 rounded-full opacity-30 blur-xl "></div>
@@ -68,7 +65,6 @@ function Hero() {
           </div>
         </div>
 
-        {/* Stats Section */}
         <div className="lg:mt-16 mt-5 grid grid-cols-2 lg:grid-cols-4   lg:gap-4 gap-1 w-11/12 mx-auto  ">
           {[
             { number: "10k+", label: "Donors Registered" },

@@ -22,7 +22,7 @@ function Navbar() {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "transform text-red-700 scale-110  font-extrabold" : ""
+            isActive ? "transform text-white scale-110  font-extrabold" : ""
           }
         >
           Home
@@ -33,7 +33,7 @@ function Navbar() {
         <NavLink
           to="/FindDonner"
           className={({ isActive }) =>
-            isActive ? "transform scale-110 text-red-700 font-extrabold" : ""
+            isActive ? "transform scale-110 text-white font-extrabold" : ""
           }
         >
           Find Donner
@@ -44,7 +44,7 @@ function Navbar() {
         <NavLink
           to="/Blogs"
           className={({ isActive }) =>
-            isActive ? "transform scale-110 text-red-700 font-extrabold" : ""
+            isActive ? "transform scale-110 text-white font-extrabold" : ""
           }
         >
           Blog
@@ -57,9 +57,7 @@ function Navbar() {
             <NavLink
               to={"Funding"}
               className={({ isActive }) =>
-                isActive
-                  ? "transform scale-110 text-red-700 font-extrabold"
-                  : ""
+                isActive ? "transform scale-110 text-white font-extrabold" : ""
               }
             >
               Help Us
@@ -69,9 +67,7 @@ function Navbar() {
             <NavLink
               to={"/DashBoard/profile"}
               className={({ isActive }) =>
-                isActive
-                  ? "transform scale-110 text-red-700 font-extrabold"
-                  : ""
+                isActive ? "transform scale-110 text-white font-extrabold" : ""
               }
             >
               Profile
@@ -81,9 +77,7 @@ function Navbar() {
             <Link
               onClick={SignOutUser}
               className={({ isActive }) =>
-                isActive
-                  ? "transform scale-110 text-red-700 font-extrabold"
-                  : ""
+                isActive ? "transform scale-110 text-white font-extrabold" : ""
               }
             >
               Log Out
@@ -95,7 +89,7 @@ function Navbar() {
           <NavLink
             to="/login"
             className={({ isActive }) =>
-              isActive ? "transform scale-110 text-red-700 font-extrabold" : ""
+              isActive ? "transform scale-110 text-white font-extrabold" : ""
             }
           >
             Log In
@@ -105,7 +99,7 @@ function Navbar() {
     </>
   );
   return (
-    <div className="navbar lg:justify-around justify-stretch w-11/12 items-center mx-auto  ">
+    <div className="navbar   lg:justify-around justify-stretch w-11/12 items-center mx-auto  ">
       {/* mobile */}
       <div className="drawer lg:hidden w-7 z-20">
         {/* mobile er menu icon */}
@@ -160,7 +154,7 @@ function Navbar() {
       </div>
       <div className=" hidden lg:flex lg:gap-2 lg:items-center  ">
         <Theme />
-        <button className=" p-2 text-primary-800 font-extrabold text-end border-2 item-center rounded-xl ">
+        <button className=" p-2 text-primary-200 font-extrabold text-end border-2 item-center rounded-xl ">
           Emergency - 999
         </button>
       </div>{" "}

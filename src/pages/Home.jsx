@@ -9,6 +9,13 @@ import AboutUs from "../components/AboutUs";
 import { AUthfirebase } from "../Auth/AuthApi";
 import { ToastContainer } from "react-toastify";
 import Hero from "./hero/Hero";
+import Statcs from "./Statatics/Statcs";
+import Howweworks from "./How we works/Howweworks";
+import Donnerreg from "./DonnerReg/Donnerreg";
+import Bloodreqlanding from "./Bloodreq/Bloodreqlanding";
+import Testimonials from "./Testimonials/Testimonials";
+import FAQs from "./FAQS/FAQs";
+import Aboutus from "./About us/Aboutus";
 
 function Home() {
   const { user } = useContext(AUthfirebase);
@@ -16,9 +23,16 @@ function Home() {
   return (
     <>
       <Hero />
-      <Searchdonner />
+      <Statcs />
+      <Howweworks />
+      <Donnerreg />
+      <Bloodreqlanding />
+      <Testimonials />
+      <FAQs />
+      <Aboutus />
+      {/* <Searchdonner />
       <WeareNowAt />
-      <AboutUs />
+      <AboutUs /> */}
     </>
   );
 }
